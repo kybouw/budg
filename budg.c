@@ -13,6 +13,8 @@
 
 /* Usage string */
 const char* USAGE = "Usage: budg <amount>\n e.g. >$ budg 123.45\n";
+/* Name of the config file */
+const char* CFGFILE = "/.config/budg.ini";
 
 /* main function */
 int main(int argc, char ** argv) {
@@ -27,6 +29,22 @@ int main(int argc, char ** argv) {
     /* parse arg */
     double amount = atof(argv[1]);
 
-    /* print amount passed in */
-    printf("%.2f\n", amount);
+    /* DEBUG print amount passed in */
+    printf("amount: %.2f\n", amount);
+
+    /* get the path to the config file */
+    // get path to HOME
+    char* HOME = getenv("HOME");
+    // allocate memory for file path
+    char* file = malloc(strlen(HOME) + strlen(CFGFILE) + 1);
+    // concat home with filename inside file
+    strcpy(file, HOME);
+    strcat(file, CFGFILE);
+
+    /* DEBUG print the file path */
+    printf("config path: %s\n", file);
+
+    free(file);
+    return 0;
+
 }
