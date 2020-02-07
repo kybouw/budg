@@ -21,7 +21,7 @@ if len(sys.argv) != 2:
 
 # create vars
 HOME = os.path.expanduser('~')
-CONFIG = os.path.join(HOME, '.config/budget.ini')
+CONFIG = os.path.join(HOME, '.config/budg/budget.ini')
 AMOUNT = float(sys.argv[1])
 
 # parse config
