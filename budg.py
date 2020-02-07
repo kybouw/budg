@@ -13,17 +13,26 @@ import configparser
 import os.path
 import sys
 
-# verify args
-if len(sys.argv) != 2:
+# function that handles input errors
+def usage_error():
     print('Usage: budget XXX.XX')
     print('Invalid argument')
     exit(1)
+    
+# verify args
+if len(sys.argv) != 2:
+    usage_error()
 
 # create vars
 HOME = os.path.expanduser('~')
 USERCONFIG = os.path.join(HOME, '.config/budg/budget.ini')
 DEFCONFIG = os.path.join(HOME, '.config/budg/defaultbudget.ini')
-AMOUNT = float(sys.argv[1])
+
+# make sure that arg is a float
+try:
+    AMOUNT = float(sys.argv[1])
+except:
+    usage_error()
 
 # parse config
 config = configparser.ConfigParser()
