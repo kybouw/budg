@@ -13,36 +13,44 @@ import configparser
 import os.path
 import sys
 
-# verify args
-if len(sys.argv) != 2:
+# function that handles input errors
+def usage_error():
     print('Usage: budget XXX.XX')
     print('Invalid argument')
     exit(1)
+    
+# verify args
+if len(sys.argv) != 2:
+    usage_error()
 
 # create vars
 HOME = os.path.expanduser('~')
-CONFIG = os.path.join(HOME, '.config/budget.ini')
-AMOUNT = float(sys.argv[1])
+USERCONFIG = os.path.join(HOME, '.config/budg/budget.ini')
+DEFCONFIG = os.path.join(HOME, '.config/budg/defaultbudget.ini')
+
+# make sure that arg is a float
+try:
+    AMOUNT = float(sys.argv[1])
+except:
+    usage_error()
 
 # parse config
 config = configparser.ConfigParser()
 # if config file already exists
-if os.path.isfile(CONFIG):
+if os.path.isfile(USERCONFIG):
 
     # then load the file
-    config.read(CONFIG)
+    config.read(USERCONFIG)
 
 # if config file does not exist
 else:
 
-    # create default config
-    config['Necessities'] = {'Total': '50'}
-    config['Savings'] = {'Total': '20'}
-    config['Discretionary'] = {'Total': '30'}
-
-    # save in default location
-    with open(CONFIG, 'w') as configfile:
-        config.write(configfile)
+    # use default budget, if present
+    if os.path.isfile(DEFCONFIG):
+        config.read(DEFCONFIG)
+    else:
+        print("No config is found. Please create one in ~/.config/budg/")
+        exit(2)
 
 # go through categories in config
 for section in config.sections():
