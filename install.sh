@@ -14,12 +14,9 @@
 
 INSTALL_F_NP='The files needed to install are not in current working dir'
 
-CONFIGLOC=$HOME/.config
-SCRIPTSLOC=$HOME/scripts
+CONFIGLOC=$HOME/.config/budg
+SCRIPTSLOC=$HOME/scripts/budg
 USERBINLOC=$HOME/bin
-
-BUDG_CONFIGLOC="$CONFIGLOC"/budg
-BUDG_SCRIPTSLOC="$SCRIPTSLOC"/budg
 
 MAINSCRIPT=budg.py
 DEFAULTCONF=defaultbudget.ini
@@ -55,39 +52,24 @@ create_dirs() {
     echo "Creating neccessary directories on your system..."
 
     if [ ! -d "$CONFIGLOC" ]; then
-        mkdir "$CONFIGLOC"
+        mkdir -p "$CONFIGLOC"
     fi
     if [ ! -d "$SCRIPTSLOC" ]; then
-        mkdir "$SCRIPTSLOC"
+        mkdir -p "$SCRIPTSLOC"
     fi
     if [ ! -d "$USERBINLOC" ]; then
-        mkdir "$USERBINLOC"
+        mkdir -p "$USERBINLOC"
     fi
 
     echo "Directories created."
 
 }
 
-create_budg_dirs() {
-
-    echo "Creating program directories..."
-
-    if [ ! -d "$BUDG_CONFIGLOC" ]; then
-        mkdir "$BUDG_CONFIGLOC"
-    fi
-    if [ ! -d "$BUDG_SCRIPTSLOC" ]; then
-        mkdir "$BUDG_SCRIPTSLOC"
-    fi
-
-    echo "Program directories created."
-
-}
-
 copy_script() {
 
-    echo "Copying $MAINSCRIPT to $BUDG_SCRIPTSLOC..."
+    echo "Copying $MAINSCRIPT to $SCRIPTSLOC..."
 
-    cp "$MAINSCRIPT" "$BUDG_SCRIPTSLOC"
+    cp "$MAINSCRIPT" "$SCRIPTSLOC"
 
     echo "Script copied."
 
@@ -97,8 +79,8 @@ copy_config() {
 
     echo "Checking config..."
 
-    if [ ! -f "$BUDG_CONFIGLOC"/budget.ini ]; then
-        cp "$DEFAULTCONF" "$BUDG_CONFIGLOC"/budget.ini
+    if [ ! -f "$CONFIGLOC"/defaultbudget.ini ]; then
+        cp "$DEFAULTCONF" "$CONFIGLOC"/defaultbudget.ini
     fi
 
     echo "Config created."
@@ -128,7 +110,6 @@ main() {
     echo "Starting install..."
     verify_files
     create_dirs
-    create_budg_dirs
     copy_script
     copy_config
     create_launcher
