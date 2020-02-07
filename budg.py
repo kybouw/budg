@@ -21,28 +21,27 @@ if len(sys.argv) != 2:
 
 # create vars
 HOME = os.path.expanduser('~')
-CONFIG = os.path.join(HOME, '.config/budg/budget.ini')
+USERCONFIG = os.path.join(HOME, '.config/budg/budget.ini')
+DEFCONFIG = os.path.join(HOME, '.config/budg/defaultbudget.ini')
 AMOUNT = float(sys.argv[1])
 
 # parse config
 config = configparser.ConfigParser()
 # if config file already exists
-if os.path.isfile(CONFIG):
+if os.path.isfile(USERCONFIG):
 
     # then load the file
-    config.read(CONFIG)
+    config.read(USERCONFIG)
 
 # if config file does not exist
 else:
 
-    # create default config
-    config['Necessities'] = {'Total': '50'}
-    config['Savings'] = {'Total': '20'}
-    config['Discretionary'] = {'Total': '30'}
-
-    # save in default location
-    with open(CONFIG, 'w') as configfile:
-        config.write(configfile)
+    # use default budget, if present
+    if os.path.isfile(DEFCONFIG):
+        config.read(DEFCONFIG)
+    else:
+        print("No config is found. Please create one in ~/.config/budg/")
+        exit(2)
 
 # go through categories in config
 for section in config.sections():
