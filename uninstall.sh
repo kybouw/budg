@@ -11,6 +11,5 @@
 
 BINFILE="$HOME"/bin/budg
 CONFDIR="$HOME"/.config/budg
-SCRIPTDIR="$HOME"/scripts/budg
 
-rm -r "$BINFILE" "$CONFDIR" "$SCRIPTDIR"
+rm -r "$BINFILE" "$CONFDIR"

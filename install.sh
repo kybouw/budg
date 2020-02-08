@@ -15,7 +15,6 @@
 INSTALL_F_NP='The files needed to install are not in current working dir'
 
 CONFIGLOC=$HOME/.config/budg
-SCRIPTSLOC=$HOME/scripts/budg
 USERBINLOC=$HOME/bin
 
 MAINSCRIPT=budg.py
@@ -51,12 +50,12 @@ create_dirs() {
 
     echo "Creating neccessary directories on your system..."
 
+    # create ~/.config/budg
     if [ ! -d "$CONFIGLOC" ]; then
         mkdir -p "$CONFIGLOC"
     fi
-    if [ ! -d "$SCRIPTSLOC" ]; then
-        mkdir -p "$SCRIPTSLOC"
-    fi
+
+    # create ~/bin
     if [ ! -d "$USERBINLOC" ]; then
         mkdir -p "$USERBINLOC"
     fi
@@ -67,9 +66,11 @@ create_dirs() {
 
 copy_script() {
 
-    echo "Copying $MAINSCRIPT to $SCRIPTSLOC..."
+    echo "Copying script to user's home bin..."
 
-    cp "$MAINSCRIPT" "$SCRIPTSLOC"
+    local BINFILE="$USERBINLOC"/budg
+    cp "$MAINSCRIPT" "$BINFILE"
+    chmod u+x "$BINFILE"
 
     echo "Script copied."
 
@@ -91,20 +92,6 @@ add_to_path() {
     echo "You must make sure your PATH includes ~/bin"
 }
 
-create_launcher() {
-
-    echo "Creating launcher..."
-
-    echo '#! /bin/bash' > "$USERBINLOC"/budg
-    echo "" >> "$USERBINLOC"/budg
-    echo 'python3 "$HOME"/scripts/budg/budg.py $1' >> "$USERBINLOC"/budg
-    chmod u+x "$USERBINLOC"/budg
-
-    add_to_path
-
-    echo "Launcher created."
-}
-
 main() {
 
     echo "Starting install..."
@@ -112,7 +99,6 @@ main() {
     create_dirs
     copy_script
     copy_config
-    create_launcher
     echo "Install complete."
 }
 
