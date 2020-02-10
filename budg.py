@@ -11,6 +11,7 @@
 # imports
 import configparser
 import os.path
+from os import system
 import sys
 
 # function that handles input errors
@@ -20,8 +21,37 @@ def usage_error():
     exit(1)
     
 # verify args
-if len(sys.argv) != 2:
+if len(sys.argv) > 2:
     usage_error()
+
+# The console object
+class BudgConsole(object):
+
+    # Constructor
+    def __init__(self):
+        # clear the screen and welcome the user
+        system('clear')
+        print('Welcome to the Budg Console\n\n')
+        # start the console session
+        self.startSession()
+
+    # method that runs the session
+    def startSession(self):
+        # session loop
+        sessionIsActive = True
+        while sessionIsActive:
+            # get user input
+            cmd = input("budg> ")
+            # 'exit' command breaks the loop
+            if cmd == "exit":
+                sessionIsActive = False
+            # DEBUG this just prints the input out
+            print(cmd)
+
+# see if user wants interactive mode
+if len(sys.argv) == 1:
+    console = BudgConsole()
+    exit(0)
 
 # create vars
 HOME = os.path.expanduser('~')
