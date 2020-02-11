@@ -11,7 +11,7 @@
 # imports
 import configparser
 import os.path
-from os import system
+import os
 import sys
 
 # function that handles input errors
@@ -28,15 +28,21 @@ if len(sys.argv) > 2:
 class BudgConsole(object):
 
     # Constructor
-    def __init__(self):
+    def __init__(self, config):
+
+        # set the config
+        self.configfile = config
+        self.cfgparser = configparser.ConfigParser()
+        self.cfgparser.read(self.configfile)
+
         # clear the screen and welcome the user
-        system('clear')
+        self.clearScreen()
         print('Welcome to the Budg Console\n\n')
         # start the console session
-        self.startSession()
+        self.runSession()
 
     # method that runs the session
-    def startSession(self):
+    def runSession(self):
         # session loop
         sessionIsActive = True
         while sessionIsActive:
@@ -46,17 +52,66 @@ class BudgConsole(object):
             if cmd == "exit":
                 sessionIsActive = False
             # DEBUG this just prints the input out
-            print(cmd)
+            self.readInput(cmd)
 
-# see if user wants interactive mode
-if len(sys.argv) == 1:
-    console = BudgConsole()
-    exit(0)
+    # clears the screen
+    def clearScreen(self):
+        if os.name == 'nt':
+            os.system('cls')
+        else:
+            os.system('clear')
+
+    # interprets the input command
+    def readInput(self, cmd):
+        consolev = cmd.split()
+        if consolev[0] == "pc":
+            self.paycheck(consolev[1:])
+        else:
+            print(consolev)
+
+    def paycheck(self, amounts):
+        total = 0.0
+        valid = True
+        for check in amounts:
+            try:
+                total += float(check)
+            except:
+                print("Invalid input")
+                valid = False
+                break
+
+        if valid == True and total > 0:
+            self.printBudget(total)
+
+    def printBudget(self, check):
+        for section in self.cfgparser.sections():
+            print(section)
+            for category in self.cfgparser[section]:
+                val = float(self.cfgparser[section][category]) * check / 102
+                txt = "  {}        ${:.2f}"
+                print(txt.format(category, val))
+
+
 
 # create vars
 HOME = os.path.expanduser('~')
 USERCONFIG = os.path.join(HOME, '.config/budg/budget.ini')
 DEFCONFIG = os.path.join(HOME, '.config/budg/defaultbudget.ini')
+CONFIG = None
+
+# check for user config, try default config, exit in shame
+if os.path.isfile(USERCONFIG):
+    CONFIG = USERCONFIG
+elif os.path.isfile(DEFCONFIG):
+    CONFIG = DEFCONFIG
+else:
+    print("Config not found")
+    exit(2)
+
+# see if user wants interactive mode
+if len(sys.argv) == 1:
+    console = BudgConsole(CONFIG)
+    exit(0)
 
 # make sure that arg is a float
 try:
@@ -66,21 +121,7 @@ except:
 
 # parse config
 config = configparser.ConfigParser()
-# if config file already exists
-if os.path.isfile(USERCONFIG):
-
-    # then load the file
-    config.read(USERCONFIG)
-
-# if config file does not exist
-else:
-
-    # use default budget, if present
-    if os.path.isfile(DEFCONFIG):
-        config.read(DEFCONFIG)
-    else:
-        print("No config is found. Please create one in ~/.config/budg/")
-        exit(2)
+config.read(CONFIG)
 
 # go through categories in config
 for section in config.sections():
