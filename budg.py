@@ -58,18 +58,25 @@ class BudgConsole(object):
 
     # method that runs the session
     def runSession(self):
+
         # session loop
         sessionIsActive = True
         while sessionIsActive:
+
             # get user input
             cmd = input("budg> ")
+
             # read input
             sessionIsActive = self.readInput(cmd)
 
     # clears the screen
     def clearScreen(self):
+
+        # Windows
         if os.name == 'nt':
             os.system('cls')
+
+        # Mac or Linux
         else:
             os.system('clear')
 
@@ -88,33 +95,56 @@ class BudgConsole(object):
         # perform arg action
         if firstarg == "exit":
             return False
+
         elif firstarg == "pc":
             self.paycheck(consolev[1:])
+
         else:
             print(firstarg)
 
         # default action for non-exit
         return True
 
+    # budget a paycheck
     def paycheck(self, amounts):
+
+        # add up the total
         total = 0.0
+
+        # check for valid inputs
         valid = True
+
+        # loop through input amounts
         for check in amounts:
+
             try:
+                # add to total
                 total += float(check)
+
             except:
+
+                # does not work if amount is not a decimal value
                 print("Invalid input")
                 valid = False
                 break
 
+        # print the budget if valid inputs
         if valid == True and total > 0:
             self.printBudget(total)
 
+    # figure out how much money goes in each category, then print it
     def printBudget(self, check):
+
+        # section by section...
         for section in self.cfgparser.sections():
             print(section)
+
+            # calculate amount for each category
             for category in self.cfgparser[section]:
+
                 val = float(self.cfgparser[section][category]) * check / 102
+
+                # format and print
                 txt = "  {}        ${:.2f}"
                 print(txt.format(category, val))
 
@@ -129,8 +159,10 @@ CONFIG = None
 # check for user config, try default config, exit in shame
 if os.path.isfile(USERCONFIG):
     CONFIG = USERCONFIG
+
 elif os.path.isfile(DEFCONFIG):
     CONFIG = DEFCONFIG
+
 else:
     print("Config not found")
     exit(2)
@@ -153,8 +185,10 @@ config.read(CONFIG)
 # go through categories in config
 for section in config.sections():
     print(section)
+
     for category in config[section]:
         # calculate and show budget for category
         val = float(config[section][category]) * AMOUNT / 102
+        
         txt = "  {}        ${:.2f}"
         print(txt.format(category, val))
