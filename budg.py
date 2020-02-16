@@ -27,10 +27,24 @@ if len(sys.argv) > 2:
 # The console object
 class BudgConsole(object):
 
+    # a dictionary for various possible commands the user could enter
+    _commandBook = {
+        "exit" : "exit",
+        "quit" : "exit",
+        "x" : "exit",
+        "q" : "exit",
+        "ex" : "exit",
+        "paycheck" : "pc",
+        "pc" : "pc",
+        "check" : "pc",
+        "income" : "pc",
+    }
+
     # Constructor
     def __init__(self, config):
 
         # set the config
+        print("Loading config file...")
         self.configfile = config
         self.cfgparser = configparser.ConfigParser()
         self.cfgparser.read(self.configfile)
@@ -38,6 +52,7 @@ class BudgConsole(object):
         # clear the screen and welcome the user
         self.clearScreen()
         print('Welcome to the Budg Console\n\n')
+
         # start the console session
         self.runSession()
 
@@ -48,11 +63,8 @@ class BudgConsole(object):
         while sessionIsActive:
             # get user input
             cmd = input("budg> ")
-            # 'exit' command breaks the loop
-            if cmd == "exit":
-                sessionIsActive = False
-            # DEBUG this just prints the input out
-            self.readInput(cmd)
+            # read input
+            sessionIsActive = self.readInput(cmd)
 
     # clears the screen
     def clearScreen(self):
@@ -62,12 +74,27 @@ class BudgConsole(object):
             os.system('clear')
 
     # interprets the input command
+    # returns true if user does not enter exit command
     def readInput(self, cmd):
+
+        # interprets input to list of args
         consolev = cmd.split()
-        if consolev[0] == "pc":
+
+        # interprets first arg
+        firstarg = "bad arg"
+        if consolev[0] in self._commandBook:
+            firstarg = self._commandBook[consolev[0]]
+
+        # perform arg action
+        if firstarg == "exit":
+            return False
+        elif firstarg == "pc":
             self.paycheck(consolev[1:])
         else:
-            print(consolev)
+            print(firstarg)
+
+        # default action for non-exit
+        return True
 
     def paycheck(self, amounts):
         total = 0.0
