@@ -32,44 +32,73 @@ def usage_error():
     print('Invalid argument')
     exit(1)
     
-# verify args
-if len(sys.argv) != 2:
-    usage_error()
+# handles program execution and input
+def main(argc, argv):
 
-# create vars
-HOME = os.path.expanduser('~')
-USERCONFIG = os.path.join(HOME, '.config/budg/budget.ini')
-DEFCONFIG = os.path.join(HOME, '.config/budg/defaultbudget.ini')
+    if(argc == 1):
+        #TODO init interactive mode
+        usage_error()
 
-# make sure that arg is a float
-try:
-    AMOUNT = float(sys.argv[1])
-except:
-    usage_error()
-
-# parse config
-config = configparser.ConfigParser()
-# if config file already exists
-if os.path.isfile(USERCONFIG):
-
-    # then load the file
-    config.read(USERCONFIG)
-
-# if config file does not exist
-else:
-
-    # use default budget, if present
-    if os.path.isfile(DEFCONFIG):
-        config.read(DEFCONFIG)
     else:
-        print("No config is found. Please create one in ~/.config/budg/")
-        exit(2)
+        # multiple values: budget their sum
+        # amount = sum(float(val) for val in argv[1:])
+        amount = 0.0
+        for val in argv[1:]:
 
-# go through categories in config
-for section in config.sections():
-    print(section)
-    for category in config[section]:
-        # calculate and show budget for category
-        val = float(config[section][category]) * AMOUNT / 102
-        txt = "  {}        ${:.2f}"
-        print(txt.format(category, val))
+            # make sure that the arg is a decimal value
+            try:
+                val = float(val)
+            except ValueError:
+                usage_error()
+            
+            amount += val
+
+        budget(amount)
+
+# splits a dollar amount into a budget
+def budget(amount):
+
+    budget = parseBudget()
+
+    for section in budget.sections():
+
+        print(section)
+        for item in budget[section]:
+
+            # (percentage% * $amount) / 100 = $
+            val = float(budget[section][item]) * amount / 100
+
+            #TODO design/test rounding solution
+            #XXX round to tenth of a penny, truncate to whole penny
+            val = f"${val:.3f}"[:-1]
+
+            #TODO look into f-string formatting: justify/width + decimal
+            print(f"  {item}        {val}")
+
+# look in the default budget location and parse a budget ini file there
+def parseBudget():
+
+    # create vars
+    userhome = os.path.expanduser('~')
+    userconfig = os.path.join(userhome, '.config/budg/budget.ini')
+    defaultconfig = os.path.join(userhome, '.config/budg/defaultbudget.ini')
+
+    parsedbudget = configparser.ConfigParser()
+
+    # if config file already exists
+    if os.path.isfile(userconfig):
+        parsedbudget.read(userconfig)
+        
+    # if config file does not exist
+    else:
+        # use default budget, if present
+        if os.path.isfile(defaultconfig):
+            parsedbudget.read(defaultconfig)
+        else:
+            print("No config is found. Please create one in ~/.config/budg/")
+            exit(2)
+
+    return parsedbudget
+
+if __name__ == "__main__":
+    main(len(sys.argv), sys.argv)
