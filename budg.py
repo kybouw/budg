@@ -39,26 +39,24 @@ def main(argc, argv):
         #TODO init interactive mode
         usage_error()
 
-    else:
-        # multiple values: budget their sum
-        # amount = sum(float(val) for val in argv[1:])
-        amount = 0.0
-        for val in argv[1:]:
+    budget_object = parseBudget()
 
-            # make sure that the arg is a decimal value
-            try:
-                val = float(val)
-            except ValueError:
-                usage_error()
-            
-            amount += val
+    # multiple values: budget their sum
+    # amount = sum(float(val) for val in argv[1:])
+    amount = 0.0
+    for val in argv[1:]:
 
-        budget(amount)
+        try:
+            val = float(val)
+        except ValueError:
+            usage_error()
+
+        amount += val
+
+    budget(amount, budget_object)
 
 # splits a dollar amount into a budget
-def budget(amount):
-
-    budget = parseBudget()
+def budget(amount, budget):
 
     for section in budget.sections():
 
