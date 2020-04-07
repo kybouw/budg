@@ -25,6 +25,7 @@
 import configparser
 import os.path
 import sys
+import math
 
 # function that handles input errors
 def usage_error():
@@ -55,8 +56,17 @@ def main(argc, argv):
 
     budget(amount, budget_object)
 
+# helper function for truncating decimals
+def truncateDollars(val):
+    if(val == float("inf") or val == float("-inf")):
+        return val
+    factor = 100
+    return math.floor(val * factor) / factor
+
 # splits a dollar amount into a budget
 def budget(amount, budget):
+
+    total = 0.0
 
     for section in budget.sections():
 
@@ -64,14 +74,16 @@ def budget(amount, budget):
         for item in budget[section]:
 
             # (percentage% * $amount) / 100 = $
-            val = float(budget[section][item]) * amount / 100
+            val = float(budget[section][item]) * amount
 
-            #TODO design/test rounding solution
-            #XXX round to tenth of a penny, truncate to whole penny
-            val = f"${val:.3f}"[:-1]
+            val = truncateDollars(val)
+
+            total += val
 
             #TODO look into f-string formatting: justify/width + decimal
-            print(f"  {item}        {val}")
+            print(f"  {item}        ${val}")
+
+    return total
 
 # look in the default budget location and parse a budget ini file there
 def parseBudget():
