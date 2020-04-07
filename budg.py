@@ -25,6 +25,7 @@
 import configparser
 import os.path
 import sys
+import math
 
 # function that handles input errors
 def usage_error():
@@ -39,8 +40,6 @@ def main(argc, argv):
         #TODO init interactive mode
         usage_error()
 
-    budget_object = parseBudget()
-
     # multiple values: budget their sum
     # amount = sum(float(val) for val in argv[1:])
     amount = 0.0
@@ -53,50 +52,91 @@ def main(argc, argv):
 
         amount += val
 
-    budget(amount, budget_object)
+    plan_cfg = readFile()
+    plan = parsePlan(plan_cfg)
+    budgit = calcBudgit(plan, amount)
+    printBudgit(budgit)
 
-# splits a dollar amount into a budget
-def budget(amount, budget):
+# helper function for truncating decimals
+def truncateDollars(val):
+    if(val == float("inf") or val == float("-inf")):
+        return val
+    factor = 100
+    return math.floor(val * factor) / factor
 
-    for section in budget.sections():
+# applies the budgit plan to the amount
+# plan -> budgit
+def calcBudgit(plan, total):
 
-        print(section)
-        for item in budget[section]:
+    budgit = {}
 
-            # (percentage% * $amount) / 100 = $
-            val = float(budget[section][item]) * amount / 100
+    for category in plan:
+        line_items = {}
 
-            #TODO design/test rounding solution
-            #XXX round to tenth of a penny, truncate to whole penny
-            val = f"${val:.3f}"[:-1]
+        for item in plan[category]:
+            value = float(plan[category][item]) * total
+            value = truncateDollars(value)
+            line_items[item] = value
 
+        budgit[category] = line_items
+
+    return budgit
+
+# prints the budgit object
+# budgit -> output
+def printBudgit(budgit):
+
+    total = 0.0
+    for category in budgit:
+        print(category)
+        for item in budgit[category]:
+            name = item
+            val = budgit[category][item]
+
+            if(name != "total"): total += val
             #TODO look into f-string formatting: justify/width + decimal
-            print(f"  {item}        {val}")
+            print(f"  {name}        ${val:.2f}")
 
-# look in the default budget location and parse a budget ini file there
-def parseBudget():
+    return total
+
+# look in the default budgit plan location and parse a plan.ini file there
+# File -> ConfigParser
+def readFile():
 
     # create vars
     userhome = os.path.expanduser('~')
     userconfig = os.path.join(userhome, '.config/budg/budget.ini')
     defaultconfig = os.path.join(userhome, '.config/budg/defaultbudget.ini')
 
-    parsedbudget = configparser.ConfigParser()
+    filedata = configparser.ConfigParser()
 
     # if config file already exists
     if os.path.isfile(userconfig):
-        parsedbudget.read(userconfig)
+        filedata.read(userconfig)
         
     # if config file does not exist
     else:
         # use default budget, if present
         if os.path.isfile(defaultconfig):
-            parsedbudget.read(defaultconfig)
+            filedata.read(defaultconfig)
         else:
             print("No config is found. Please create one in ~/.config/budg/")
             exit(2)
 
-    return parsedbudget
+    return filedata
+
+# turns file data from configparser to a budgit plan
+# ConfigParser -> plan
+def parsePlan(filedata):
+
+    plan = {}
+    for section in filedata.sections():
+        line_items = {}
+        for item in filedata[section]:
+            line_items[item] = filedata[section][item]
+        plan[section] = line_items
+
+    return plan
 
 if __name__ == "__main__":
     main(len(sys.argv), sys.argv)
