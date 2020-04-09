@@ -105,8 +105,8 @@ def readFile():
 
     # create vars
     userhome = os.path.expanduser('~')
-    userconfig = os.path.join(userhome, '.config/budg/budget.ini')
-    defaultconfig = os.path.join(userhome, '.config/budg/defaultbudget.ini')
+    userconfig = os.path.join(userhome, '.config/budg/plan.ini')
+    defaultconfig = os.path.join(userhome, '.config/budg/defaultplan.ini')
 
     filedata = configparser.ConfigParser()
 

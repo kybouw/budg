@@ -30,7 +30,7 @@ CONFIGLOC=$HOME/.config/budg
 USERBINLOC=$HOME/bin
 
 MAINSCRIPT=budg.py
-DEFAULTCONF=defaultbudget.ini
+DEFAULTCONF=defaultplan.ini
 
 
 ### functions
@@ -92,8 +92,8 @@ copy_config() {
 
     echo "Checking config..."
 
-    if [ ! -f "$CONFIGLOC"/defaultbudget.ini ]; then
-        cp "$DEFAULTCONF" "$CONFIGLOC"/defaultbudget.ini
+    if [ ! -f "$CONFIGLOC"/"$DEFAULTCONF" ]; then
+        cp "$DEFAULTCONF" "$CONFIGLOC"/"$DEFAULTCONF"
     fi
 
     echo "Config created."
