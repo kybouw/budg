@@ -21,7 +21,11 @@
 # along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
 ################################################################################
 
+echo "Uninstalling budg..."
+
 BINFILE="$HOME"/bin/budg
 CONFDIR="$HOME"/.config/budg
 
 rm -r "$BINFILE" "$CONFDIR"
+
+echo "Uninstall completed."
