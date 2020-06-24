@@ -2,7 +2,7 @@
 
 Congratulations on taking hold of your financial freedom! The first step to building wealth is having a budgeting system that works _for_ you, so that you can focus on the important things in life.
 
-This tool is meant to make budgets simpler by removing the need for spreadsheets and calculators. You simply outline your budget and whenever you get paid, just run the command and _voila!_ You have a guide that tells you exactly where your money needs to go! There are no servers or clouds involved, so you can rest easy knowing that your financial data is kept secure and private on your very own device.
+This tool is meant to make budgets simpler by removing the need for spreadsheets and calculators. You simply outline your budget and whenever you get paid, just run the command and _voila!_ You have a guide that tells you exactly where your money needs to go! There are no servers or clouds involved, so you can rest easy knowing that your financial data is not being shared with anyone except yourself.
 
 ## Contents
 
