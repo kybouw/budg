@@ -140,11 +140,13 @@ Once you know how much you can spend, you should try to keep your spending under
 
 ### Savings - 20%
 
-This is what I consider to be the most important part of any budget plan. You should save about twenty percent of all of your after-tax income. You should do this immediately after your paycheck hits the bank. It's called *paying yourself first*, and it is what separates the financially responsible from everyone else.
+This is what I consider to be the most important part of any budget. You should save at least twenty percent of your after-tax income immediately after your paycheck hits the bank. It's called *paying yourself first* (a.k.a "PYF"), and it is the key to making yourself more financially secure.
 
-Now, "saving" does not necessarily mean just putting this money into a savings account at your bank. No, this category should include all of your long-term savings goals: retirement accounts, savings accounts, investments, emergency funds, etc. If you do not have any savings, you should consider building up your emergency fund. It is important to have money put somewhere that is easy to access at a moment's notice in case something happens to your income. Most say that you should have at least three months worth of your current income saved away to be safeguarded from hard times. After that, then you can pay more attention to your retirement and investments.
+Now, "saving" does not necessarily mean just putting money into a savings account. No, this category includes all of your long-term savings goals: retirement accounts, savings accounts, investments, emergency funds, etc.
 
-This is the category that builds your financial future and gives you the security and peace of mind that you deserve. You should be very hesitant to move money out of this category unless it is an absolute emergency.
+If you do not have one already, consider creating an emergency fund. An emergency fund is a savings account that will allow you to withdraw money whenever you need it, such as in the event of a loss of income. Most say that you should have at least three months worth of your current income saved away in an emergency fund. Once your emergency fund is adequate, then you can pay more attention to your retirement and investments.
+
+This is the category that builds your financial future and gives you the security and peace of mind that you deserve. Be very hesitant to move money out of this category unless it is an absolute emergency.
 
 ### Discretionary - 30%
 
