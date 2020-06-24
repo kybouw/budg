@@ -126,9 +126,11 @@ Once you see `Uninstall completed.`, budg is removed from your system completely
 
 ## The 50/20/30 Plan
 
-To get you started, a default plan is provided for you. It acts according to the 50/20/30 budget model, a simple budget system popularized by U.S. Senator Elizabeth Warren. This is the budget model that budg is built around. It works by taking your total income and dividing it into groups based on a percentage, creating a sort of "allowance" for yourself. Once you have that allowance calculated (which budg does for you), you are better equipped to make responsible spending decisions.
+To get started with budg, a default budgit plan is provided: the 50/20/30 plan, a simple budget system popularized by U.S. Senator Elizabeth Warren. This model can easily be modified to fit the user's needs, which is why budg uses it as a starting point for building budgit plans.
 
-Here is how it works: you start by calculating your after-tax income. For the most part, this is just the value of your paycheck. Then, you divide that paycheck into three groups of unequal weight.
+The model works by defining 3 major spending categories: necessities, savings, and discretionary. Each category is given a weight (50%, 20%, and 30%, respectively). The user takes their total after-tax income and divides it into the categories according to weight, creating "allowances" for themself. Once all of the allowances are calculated, the user will know how every dollar they earned is going to work for them.
+
+The user is able to create their own budgit plans from the default plan. They can add or remove categories, change the weights of the categories, and add use subcategories to more precisely manage their income.
 
 ![The 50/20/30 budget](https://www.thebalance.com/thmb/T7aTgYvTRfglPtW9C2TZFJSeSZQ=/950x0/filters:format(webp)/the-50-30-20-rule-of-thumb-453922-final-5b61ec23c9e77c007be919e1-5ecfc51b09864e289b0ee3fa0d52422f.png)Image by (c) The Balance 2019. Their article on the 50/20/30 budget can be found [here](https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922).
 
@@ -169,4 +171,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
+along with budg. If not, see <https://www.gnu.org/licenses/gpl.html>.
