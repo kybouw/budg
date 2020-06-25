@@ -126,33 +126,37 @@ Once you see `Uninstall completed.`, budg is removed from your system completely
 
 ## The 50/20/30 Plan
 
-To get started with budg, a default budgit plan is provided: the 50/20/30 plan, a simple budget system popularized by U.S. Senator Elizabeth Warren. This model can easily be modified to fit the user's needs, which is why budg uses it as a starting point for building budgit plans.
+To get started with budg, a default budgit plan is provided: the 50/20/30 plan, a simple budget system popularized by U.S. Senator Elizabeth Warren. This model can easily be modified to fit the your needs, which is why budg uses it as a starting point for building budgit plans.
 
-The model works by defining 3 major spending categories: necessities, savings, and discretionary. Each category is given a weight (50%, 20%, and 30%, respectively). The user takes their total after-tax income and divides it into the categories according to weight, creating "allowances" for themself. Once all of the allowances are calculated, the user will know how every dollar they earned is going to work for them.
+The model works by defining 3 major spending categories: necessities, savings, and discretionary. Each category is given a weight (50%, 20%, and 30%, respectively). You take your total after-tax income and divide it into the categories according to weight, creating allowances for yourself. Once all of your allowances are calculated, you will know how every dollar you earned is going to work for you.
 
-The user is able to create their own budgit plans from the default plan. They can add or remove categories, change the weights of the categories, and add use subcategories to more precisely manage their income.
+You are able to create your own budgit plans from the default plan. You can add or remove categories, change the weights of categories, and add subcategories to more precisely manage your income.
+
+This guide will help you get familiar with the 50/20/30 budget and hopefully inspire ideas that you can implement in your own budgit plan.
 
 ![The 50/20/30 budget](https://www.thebalance.com/thmb/T7aTgYvTRfglPtW9C2TZFJSeSZQ=/950x0/filters:format(webp)/the-50-30-20-rule-of-thumb-453922-final-5b61ec23c9e77c007be919e1-5ecfc51b09864e289b0ee3fa0d52422f.png)Image by (c) The Balance 2019. Their article on the 50/20/30 budget can be found [here](https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922).
 
 ### Necessities - 50%
 
-Fifty percent of that after-tax income is meant for necessities. This includes anything that you cannot live without. Usually, this means things like rent, groceries, transportation, debt payments, insurance, and maybe your phone bill. Of course, you decide what belongs here, but make sure it only includes things that you **_need_**. This is strictly the *must-have* category and is typically the "boring" part of spending.
+Fifty percent of your after-tax income is meant for necessities. This includes anything that you cannot live without or anything you *must* pay. Usually, this means things like rent, groceries, transportation, debt payments, insurance, and maybe your phone bill. Of course, you decide what belongs here, but make sure it only includes things that you **_need_**. Necessities is strictly the *must-have* category and is typically the "boring" part of spending.
 
-Once you know how much you can spend, you should try to keep your spending under that. If you find that you are spending too much on the necessities, you should consider ways to save. Maybe refinancing your mortgage, finding a cheaper place to live, switching to more affordable insurance, etc. You could take money from other parts of your budget, but beware, you could be spending too much on something that you think you need but really belongs in another category. Upgrades to necessities belong in the discretionary category. For example, the cost of the "premium" unlimited data phone plan over the most basic phone plan is a discretionary expense because you can probably still live and work with a less expensive plan.
+Once you know how much you can spend on necessities, try to keep your spending under that amount. If you find that you are spending too much on necessities, consider ways to save. Maybe refinancing your mortgages or loans, finding a cheaper place to live, switching to more affordable insurance, etc. If you are spending significantly less than your allowance, then perhaps you could allocate some of that excess to your savings allowance.
+
+Upgrades to necessities often belong in the discretionary category. For example, the cost of the "premium" unlimited data phone plan over the most basic phone plan is a discretionary expense because you might *need* a phone plan and not *need* unlimited data. However, if your job requires you to stay on-call and online at all times, a premium phone plan could be considered a necessity. This category is all about *your* needs!
 
 ### Savings - 20%
 
-This is what I consider to be the most important part of any budget. You should save at least twenty percent of your after-tax income immediately after your paycheck hits the bank. It's called *paying yourself first* (a.k.a "PYF"), and it is the key to making yourself more financially secure.
+This is the most important part of any budget. At least twenty percent of your after-tax income is put into savings immediately after your paycheck hits your bank account. It's called __*paying yourself first*__ (a.k.a __PYF__), and it is the key to financial security.
 
 Now, "saving" does not necessarily mean just putting money into a savings account. No, this category includes all of your long-term savings goals: retirement accounts, savings accounts, investments, emergency funds, etc.
 
-If you do not have one already, consider creating an emergency fund. An emergency fund is a savings account that will allow you to withdraw money whenever you need it, such as in the event of a loss of income. Most say that you should have at least three months worth of your current income saved away in an emergency fund. Once your emergency fund is adequate, then you can pay more attention to your retirement and investments.
+If you do not have one already, consider creating an emergency fund. An emergency fund is a savings account that will allow you to withdraw money when you need it, in case of emergencies that cause you to lose your income. You should have at least three months worth of your current income saved away in an emergency fund. Once your emergency fund is adequate, then you can pay more attention to your long term savings like retirement and investments.
 
-This is the category that builds your financial future and gives you the security and peace of mind that you deserve. Be very hesitant to move money out of this category unless it is an absolute emergency.
+This is the category that builds your financial future and gives you the security and peace of mind that you deserve. The whole point of budgeting is to save money. Be very hesitant to move money out of this category unless it is an absolute emergency.
 
 ### Discretionary - 30%
 
-This is the "fun" category. It includes all of the things that you **_want_**, but maybe do not need. It includes restaurants, alcohol and recreation, movies and concerts, travel, spiffy new clothes, that unlimited data plan, speedy internet package, or the latest smartphone. This category is not just stand-alone expenses, but also any upgrades to the Necessities category that you want. Say, a nicer car or a new cell phone. These are the things that are completely *optional*, things you can get by without. However, just because they are optional, does not mean you should ignore this category, either. This is part of your budget that pays for the things that make life more fun and enjoyable.
+This is the "fun" category. It includes all of the things that you **_want_**, but maybe do not need. It includes restaurants, alcohol and recreation, movies and concerts, travel, spiffy new clothes, or the latest smartphone. This category is not just stand-alone expenses, but also any upgrades to the Necessities category that you want. Say, a nicer car or a faster internet service plan. These are the things that are completely *optional*, things you can get by without. However, just because you do not need these expenses does not mean you should ignore this category. This is the part of your budget that pays for the things that make life more fun and enjoyable. Putting money towards the things you want (and knowing that you are not hurting the bank by doing so) is the most rewarding part of keeping a budget.
 
 [Read more about the 50/20/30 budget on Investopedia.](https://www.investopedia.com/ask/answers/022916/what-502030-budget-rule.asp)
 
