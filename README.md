@@ -12,7 +12,7 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
   - [plans](#plans)
   - [budgits](#budgits)
 - [Installation](#installation)
-- [Uninstallation](#uninstallation)
+  - [Uninstallation](#uninstallation)
 - [The 50/20/30 Plan](#the-502030-plan)
   - [Necessities - 50%](#necessities---50)
   - [Savings - 20%](#savings---20)
@@ -86,13 +86,13 @@ Install complete.
 
 There is a little bit more output than shown here, but once you see the `Install complete.` message, you are ready to use budg!
 
-## Uninstallation
+### Uninstallation
 
 There is also an uninstallation script included with the repo. You can run it the same way as the install script. However, it does not require any of the other files in the repo, so you can run it without the repo.
 
 **Note:** the uninstall script will remove all budgit plans you have on your system. If you plan on reinstalling in the future, or if you just want to save the outline of your current budget, make sure to create a backup. Your plan is located in `~/.config/budg/`. _This is being addressed by issue #22._
 
-### Method 1 (**_recommended_**): the repo is already on your system
+#### Method 1 (**_recommended_**): the repo is already on your system
 
 If you have the repo that you used to install budg, then just use the uninstall script that was included with it. This is the recommended method for removing budg since updated versions of the uninstall script may not be compatible with the version of budg that you have installed.
 
@@ -106,7 +106,7 @@ Uninstall completed.
 
 Once you see `Uninstall completed.`, budg is removed from your system completely.
 
-### Method 2: downloading the uninstaller
+#### Method 2: downloading the uninstaller
 
 If you no longer have the repo installed, you can download the uninstaller standalone.
 
