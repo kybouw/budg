@@ -90,13 +90,13 @@ There is a little bit more output than shown here, but once you see the `Install
 
 There is also an uninstallation script included with the repo. You can run it the same way as the install script. However, it does not require any of the other files in the repo, so you can run it without the repo.
 
-**Note:** the uninstall script will remove all budgit plans you have on your system. If you plan on reinstalling in the future, or if you just want to save the outline of your current budget, make sure to create a backup. Your plan is located in `~/.config/budg/`.
+**Note:** the uninstall script will remove all budgit plans you have on your system. If you plan on reinstalling in the future, or if you just want to save the outline of your current budget, make sure to create a backup. Your plan is located in `~/.config/budg/`. _This is being addressed by issue #22._
 
 ### Method 1 (**_recommended_**): the repo is already on your system
 
-If you already have the repo from which you installed with on your system, then just use the uninstall script that was included with it. This is the recommended method for removing budg. Updated versions of the uninstall script may not be compatible with the version of budg that you have installed, so downloaded an updated uninstall script may not completely remove budg from your system.
+If you have the repo that you used to install budg, then just use the uninstall script that was included with it. This is the recommended method for removing budg since updated versions of the uninstall script may not be compatible with the version of budg that you have installed.
 
-1. Just run `uninstall.sh`
+1. Run `uninstall.sh`
 
 ```text
 $ ./path/to/repo/uninstall.sh
@@ -138,15 +138,15 @@ This guide will help you get familiar with the 50/20/30 budget and hopefully ins
 
 ### Necessities - 50%
 
-Fifty percent of your after-tax income is meant for necessities. This includes anything that you cannot live without or anything you *must* pay. Usually, this means things like rent, groceries, transportation, debt payments, insurance, and maybe your phone bill. Of course, you decide what belongs here, but make sure it only includes things that you **_need_**. Necessities is strictly the *must-have* category and is typically the "boring" part of spending.
+Fifty percent of your after-tax income is meant for necessities. This includes anything that you cannot live without or anything you _must_ pay. Usually, this means things like rent, groceries, transportation, debt payments, insurance, and maybe your phone bill. Of course, you decide what belongs here, but make sure it only includes things that you **_need_**. Necessities is strictly the _must-have_ category and is typically the "boring" part of spending.
 
 Once you know how much you can spend on necessities, try to keep your spending under that amount. If you find that you are spending too much on necessities, consider ways to save. Maybe refinancing your mortgages or loans, finding a cheaper place to live, switching to more affordable insurance, etc. If you are spending significantly less than your allowance, then perhaps you could allocate some of that excess to your savings allowance.
 
-Upgrades to necessities often belong in the discretionary category. For example, the cost of the "premium" unlimited data phone plan over the most basic phone plan is a discretionary expense because you might *need* a phone plan and not *need* unlimited data. However, if your job requires you to stay on-call and online at all times, a premium phone plan could be considered a necessity. This category is all about *your* needs!
+Upgrades to necessities often belong in the discretionary category. For example, the cost of the "premium" unlimited data phone plan over the most basic phone plan is a discretionary expense because you might _need_ a phone plan and not _need_ unlimited data. However, if your job requires you to stay on-call and online at all times, a premium phone plan could be considered a necessity. This category is all about _your_ needs!
 
 ### Savings - 20%
 
-This is the most important part of any budget. At least twenty percent of your after-tax income is put into savings immediately after your paycheck hits your bank account. It's called __*paying yourself first*__ (a.k.a __PYF__), and it is the key to financial security.
+This is the most important part of any budget. At least twenty percent of your after-tax income is put into savings immediately after your paycheck hits your bank account. It's called **_paying yourself first_** (a.k.a **PYF**), and it is the key to financial security.
 
 Now, "saving" does not necessarily mean just putting money into a savings account. No, this category includes all of your long-term savings goals: retirement accounts, savings accounts, investments, emergency funds, etc.
 
@@ -156,7 +156,7 @@ This is the category that builds your financial future and gives you the securit
 
 ### Discretionary - 30%
 
-This is the "fun" category. It includes all of the things that you **_want_**, but maybe do not need. It includes restaurants, alcohol and recreation, movies and concerts, travel, spiffy new clothes, or the latest smartphone. This category is not just stand-alone expenses, but also any upgrades to the Necessities category that you want. Say, a nicer car or a faster internet service plan. These are the things that are completely *optional*, things you can get by without. However, just because you do not need these expenses does not mean you should ignore this category. This is the part of your budget that pays for the things that make life more fun and enjoyable. Putting money towards the things you want (and knowing that you are not hurting the bank by doing so) is the most rewarding part of keeping a budget.
+This is the "fun" category. It includes all of the things that you **_want_**, but maybe do not need. It includes restaurants, alcohol and recreation, movies and concerts, travel, spiffy new clothes, or the latest smartphone. This category is not just stand-alone expenses, but also any upgrades to the Necessities category that you want. Say, a nicer car or a faster internet service plan. These are the things that are completely _optional_, things you can get by without. However, just because you do not need these expenses does not mean you should ignore this category. This is the part of your budget that pays for the things that make life more fun and enjoyable. Putting money towards the things you want (and knowing that you are not hurting the bank by doing so) is the most rewarding part of keeping a budget.
 
 [Read more about the 50/20/30 budget on Investopedia.](https://www.investopedia.com/ask/answers/022916/what-502030-budget-rule.asp)
 
