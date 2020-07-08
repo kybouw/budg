@@ -1,7 +1,9 @@
 # budg
+
 My personal budgeting assistant. My tool for budgeting paychecks and deciding how to spend my hard-earned cash.
 
 ## License Notice
+
 Copyright (C) 2020 Kyle Bouwman
 
 budg is free software: you can redistribute it and/or modify
