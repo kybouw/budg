@@ -138,5 +138,6 @@ def parsePlan(filedata):
 
     return plan
 
+# run default
 if __name__ == "__main__":
     main(len(sys.argv), sys.argv)
