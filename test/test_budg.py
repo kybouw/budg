@@ -1,7 +1,7 @@
 import configparser
 import os.path
 
-import budg.src.budg as budg
+from src import budg
 
 
 def getBudgitPlan():
@@ -10,11 +10,13 @@ def getBudgitPlan():
     def_plan_path = os.path.join(os.path.curdir, 'testplan.ini')
     if os.path.isfile(def_plan_path):
         config.read(def_plan_path)
-    
+
     plan = budg.parsePlan(config)
     return plan
 
+
 plan = getBudgitPlan()
+
 
 class TestBudgetCalc():
 
