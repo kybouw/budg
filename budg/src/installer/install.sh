@@ -26,11 +26,11 @@
 
 INSTALL_F_NP='The files needed to install are not in current working dir'
 
-CONFIGLOC=$HOME/.config/budg
-USERBINLOC=$HOME/bin
+CONFIGLOC="$HOME/.config/budg"
+USERBINLOC="$HOME/bin"
 
-MAINSCRIPT=budg.py
-DEFAULTCONF=defaultplan.ini
+MAINSCRIPT="src/budg.py"
+DEFAULTCONF="src/defaultplan.ini"
 
 
 ### functions
