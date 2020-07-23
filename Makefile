@@ -1,4 +1,4 @@
-#! /bin/bash
+
 
 ################################################################################
 # budg - my python script for budgeting my paychecks
@@ -21,11 +21,34 @@
 # along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
 ################################################################################
 
-echo "Uninstalling budg..."
+.PHONY: all install clean clean-bin
 
-BINFILE="$HOME"/bin/budg
-CONFDIR="$HOME"/.config/budg
+all:
+	# You find a strange lantern. You hold it by your ear and shake it around 
+	# to hear if anything is inside. You hear a faint voice whisper a
+	fortune
 
-rm -r "$BINFILE" "$CONFDIR"
 
-echo "Uninstall completed."
+install: src/budg.py src/defaultplan.ini
+	# Creating directories...
+	mkdir -p ~/.config/budg
+	mkdir -p ~/bin
+	# Copying program...
+	cp src/budg.py ~/bin/budg
+	chmod u+x ~/bin/budg
+	# Copying config...
+	cp src/defaultplan.ini ~/.config/budg/defaultplan.ini
+	# Install Complete. (add ~/bin to PATH)
+
+
+clean:
+	# Removing budg...
+	rm ~/bin/budg 
+	rm -r ~/.config/budg
+	# budg uninstalled
+
+
+clean-bin: ~/bin/budg
+	# removing budg...
+	rm ~/bin/budg
+	# budg removed
