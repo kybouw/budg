@@ -23,60 +23,47 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
 
 ## Installation
 
-Budg can be installed using the bash script included in the repo.
+Budg can be installed using make.
 
 1. Download the repo
 2. cd into the repo
-3. run `install.sh`
+3. run `make install`
 
 ```text
 $ git clone https://github.com/kybouw/budg.git
-Cloning into 'budg'...
+Cloning into 'budg'
+...
 $ cd budg
-$ ./install.sh
-Starting install...
-Install complete.
+$ make install
+...
+# Install Complete
 ```
 
-There is a little bit more output than shown here, but once you see the `Install complete.` message, you are ready to use budg!
+This script will copy the python file to `~/bin/budg` and make it executable. You must add `~/bin` to your path variable if you want to call `budg` from the command line.
 
 ### Uninstallation
 
-There is also an uninstallation script included with the repo. You can run it the same way as the install script. However, it does not require any of the other files in the repo, so you can run it without the repo.
+You can also use make to remove budg from your system.
 
-**Note:** the uninstall script will remove all budg plans you have on your system. If you will reinstall in the future, or if you just want to save the outline of your current budget, make sure to create a backup. Your plan is located in `~/.config/budg/`. _This is being addressed by issue #22._
+#### make clean
 
-#### Method 1 (**_recommended_**): the repo is already on your system
-
-If you have the repo that you used to install budg, then just use the uninstall script that was included with it. This is the recommended method for removing budg since updated versions of the uninstall script may not be compatible with the version of budg that you have installed.
-
-1. Run `uninstall.sh`
+To remove all trace of budg from your system. Deletes the python file in ~/bin and all configuration files in `~/.config/budg/`.
 
 ```text
-$ ./path/to/repo/uninstall.sh
-Uninstalling budg...
-Uninstall completed.
+$ make clean
+...
+# budg uninstalled
 ```
 
-Once you see `Uninstall completed.`, budg is removed from your system completely.
+#### make clean-bin
 
-#### Method 2: downloading the uninstaller
-
-If you no longer have the repo installed, you can download the uninstaller standalone.
-
-1. Download the script
-2. Make it executable
-3. Run the script
+This will remove all budg files from your system except your budget plans. The files in `~/.config/budg/` will stay on your system.
 
 ```text
-$ curl https://raw.githubusercontent.com/kybouw/budg/master/uninstall.sh > uninstall.sh
-$ chmod u+x uninstall.sh
-$ ./uninstall.sh
-Uninstalling budg...
-Uninstall completed.
+$ make clean-bin
+...
+# budg uninstalled
 ```
-
-Once you see `Uninstall completed.`, budg is removed from your system completely.
 
 ## Usage
 
@@ -100,7 +87,7 @@ You can change your plan by modifying `~/.config/budg/plan.ini`.
 
 ### Plans
 
-Plans are documents that outline your budget. They tell budg how you want your money to be spent. These documents are stored in `~/.config/budg/`. The installer (`install.sh`) will create a default plan file for you.
+Plans are documents that outline your budget. They tell budg how you want your money to be spent. These documents are stored in `~/.config/budg/`. The installer (`make install`) will create a default plan file for you.
 
 #### ~/.config/budg/defaultplan.ini
 
