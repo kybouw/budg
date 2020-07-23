@@ -29,8 +29,8 @@ INSTALL_F_NP='The files needed to install are not in current working dir'
 CONFIGLOC="$HOME/.config/budg"
 USERBINLOC="$HOME/bin"
 
-MAINSCRIPT="src/budg.py"
-DEFAULTCONF="src/defaultplan.ini"
+MAINSCRIPT="budg.py"
+DEFAULTCONF="defaultplan.ini"
 
 
 ### functions
@@ -42,10 +42,10 @@ verify_files() {
 
     local FILES_EXIST=true
 
-    if [ ! -f "$MAINSCRIPT" ]; then
+    if [ ! -f src/"$MAINSCRIPT" ]; then
         FILES_EXIST=false
     fi
-    if [ ! -f "$DEFAULTCONF" ]; then
+    if [ ! -f src/"$DEFAULTCONF" ]; then
         FILES_EXIST=false
     fi
 
@@ -81,7 +81,7 @@ copy_script() {
     echo "Copying script to user's home bin..."
 
     local BINFILE="$USERBINLOC"/budg
-    cp "$MAINSCRIPT" "$BINFILE"
+    cp src/"$MAINSCRIPT" "$BINFILE"
     chmod u+x "$BINFILE"
 
     echo "Script copied."
@@ -93,7 +93,7 @@ copy_config() {
     echo "Checking config..."
 
     if [ ! -f "$CONFIGLOC"/"$DEFAULTCONF" ]; then
-        cp "$DEFAULTCONF" "$CONFIGLOC"/"$DEFAULTCONF"
+        cp src/"$DEFAULTCONF" "$CONFIGLOC"/"$DEFAULTCONF"
     fi
 
     echo "Config created."
