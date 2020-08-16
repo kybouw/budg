@@ -39,7 +39,7 @@ $ make install
 # Install Complete
 ```
 
-This script will copy the python file to `~/bin/budg` and make it executable. You must add `~/bin` to your path variable if you want to call `budg` from the command line.
+This script will copy the python file to `~/.local/bin/budg` and make it executable.
 
 ### Uninstallation
 
