@@ -118,18 +118,18 @@ def readFile():
 
     filedata = configparser.ConfigParser()
 
-    # if config file already exists
+    # if user config file exists
     if os.path.isfile(userconfig):
         filedata.read(userconfig)
 
-    # if config file does not exist
+    # user config does not exist, so try default config
+    elif os.path.isfile(defaultconfig):
+        filedata.read(defaultconfig)
+
+    # no config exists
     else:
-        # use default budget, if present
-        if os.path.isfile(defaultconfig):
-            filedata.read(defaultconfig)
-        else:
-            print("No config is found. Please create one in ~/.config/budg/")
-            exit(2)
+        print("No config is found. Please create one in ~/.config/budg/")
+        exit(2)
 
     return filedata
 
