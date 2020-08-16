@@ -30,25 +30,30 @@ all:
 
 
 install: src/budg.py src/defaultplan.ini
+
 	# Creating directories...
+	mkdir -p ~/.local/bin
 	mkdir -p ~/.config/budg
-	mkdir -p ~/bin
+
 	# Copying program...
-	cp src/budg.py ~/bin/budg
-	chmod u+x ~/bin/budg
+	cp src/budg.py ~/.local/bin/budg
+	chmod u+x ~/.local/bin/budg
+
 	# Copying config...
 	cp src/defaultplan.ini ~/.config/budg/defaultplan.ini
-	# Install Complete. (add ~/bin to PATH)
+
+	# Install Complete.
 
 
 clean:
 	# Removing budg...
-	rm ~/bin/budg 
+	rm ~/.local/bin/budg 
 	rm -r ~/.config/budg
+
 	# budg uninstalled
 
 
-clean-bin: ~/bin/budg
+clean-bin: ~/.local/bin/budg
 	# removing budg...
-	rm ~/bin/budg
+	rm ~/.local/bin/budg
 	# budg removed
