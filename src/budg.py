@@ -29,6 +29,18 @@ import sys
 import math
 
 
+# constants
+COMMANDS = {
+    'exit': 'exit',
+    'x': 'exit',
+    'quit': 'exit',
+    'q': 'exit',
+    'pc': 'income',
+    'income': 'income',
+    'check': 'income'
+}
+
+
 # function that handles input errors
 def usage_error():
     print('Usage: budget XXX.XX')
@@ -39,26 +51,82 @@ def usage_error():
 # handles program execution and input
 def main(argc, argv):
 
-    if(argc == 1):
-        # TODO init interactive mode
-        usage_error()
+    # console mode
+    if argc == 1:
+        # clear the screen
+        clear_screen()
 
+        # start the engine
+        run_console_session()
+
+    # single command mode
+    else:
+        run_single_session(argv[1:])
+
+
+def run_single_session(argv):
     # multiple values: budget their sum
     # amount = sum(float(val) for val in argv[1:])
-    amount = 0.0
-    for val in argv[1:]:
+    amount = totalize(argv)
+    plan = load_plan()
+    budgit = calcBudgit(plan, amount)
+    printBudgit(budgit)
 
+
+# clears the terminal screen
+def clear_screen():
+
+    # windows
+    if os.name == 'nt':
+        os.system('cls')
+
+    # mac and unix
+    else:
+        os.system('clear')
+
+
+# controls loop for interactive mode
+def run_console_session():
+
+    # load plan
+    plan = load_plan()
+
+    # interaction loop
+    running = True
+    while running:
+
+        # prompt
+        argv = input('budg> ').split()
+
+        # interpret commands
+        if COMMANDS.get(argv[0]) == 'exit':
+            # quit the console
+            running = False
+
+        elif COMMANDS.get(argv[0]) == 'income':
+            # run budg on a set of income
+            b = calcBudgit(plan, totalize(argv[1:]))
+            printBudgit(b)
+
+        else:
+            # unknown command
+            print("You said", argv)
+
+
+# helper function for adding up income amounts
+def totalize(values):
+
+    # sum up the values
+    amount = 0.0
+    for val in values:
+
+        # catch non-floats and throw an error
         try:
-            val = float(val)
+            amount += float(val)
         except ValueError:
             usage_error()
 
-        amount += val
-
-    plan_cfg = readFile()
-    plan = parsePlan(plan_cfg)
-    budgit = calcBudgit(plan, amount)
-    printBudgit(budgit)
+    return amount
 
 
 # helper function for truncating decimals
@@ -107,10 +175,11 @@ def printBudgit(budgit):
     return total
 
 
-# look in the default budgit plan location and parse a plan.ini file there
-# File -> ConfigParser
-def readFile():
+# uses config parser to load the plan from disk
+# file -> plan
+def load_plan():
 
+    # read ini into configparser
     # create vars
     userhome = os.path.expanduser('~')
     userconfig = os.path.join(userhome, '.config/budg/plan.ini')
@@ -118,11 +187,11 @@ def readFile():
 
     filedata = configparser.ConfigParser()
 
-    # if user config file exists
+    # if user config file exists, read it
     if os.path.isfile(userconfig):
         filedata.read(userconfig)
 
-    # user config does not exist, so try default config
+    # other wise check for default, and read that
     elif os.path.isfile(defaultconfig):
         filedata.read(defaultconfig)
 
@@ -131,13 +200,7 @@ def readFile():
         print("No config is found. Please create one in ~/.config/budg/")
         exit(2)
 
-    return filedata
-
-
-# turns file data from configparser to a budgit plan
-# ConfigParser -> plan
-def parsePlan(filedata):
-
+    # decode configparser data into simple dictionary
     plan = {}
     for section in filedata.sections():
         line_items = {}
