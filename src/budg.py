@@ -73,18 +73,6 @@ def run_single_session(argv):
     printBudgit(budgit)
 
 
-# clears the terminal screen
-def clear_screen():
-
-    # windows
-    if os.name == 'nt':
-        os.system('cls')
-
-    # mac and unix
-    else:
-        os.system('clear')
-
-
 # controls loop for interactive mode
 def run_console_session():
 
@@ -113,7 +101,19 @@ def run_console_session():
             print("You said", argv)
 
 
-# helper function for adding up income amounts
+# helper function: clears the terminal screen
+def clear_screen():
+
+    # windows
+    if os.name == 'nt':
+        os.system('cls')
+
+    # mac and unix
+    else:
+        os.system('clear')
+
+
+# helper function: adds up a list of floats from strings
 def totalize(values):
 
     # sum up the values
@@ -129,10 +129,14 @@ def totalize(values):
     return amount
 
 
-# helper function for truncating decimals
-def truncateDollars(val):
+# helper function: truncates decimals
+def truncate_dollars(val):
+
+    # leave infinity alone
     if(val == float("inf") or val == float("-inf")):
         return val
+
+    # move decimal two spots over, chop off tail, move decimal back
     factor = 100
     return math.floor(val * factor) / factor
 
@@ -148,7 +152,7 @@ def calcBudgit(plan, total):
 
         for item in plan[category]:
             value = float(plan[category][item]) * total
-            value = truncateDollars(value)
+            value = truncate_dollars(value)
             line_items[item] = value
 
         budgit[category] = line_items
