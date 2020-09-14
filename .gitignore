@@ -1,4 +1,2 @@
 .vscode
-sand.py
-__pycache__
-.pytest_cache
+build/

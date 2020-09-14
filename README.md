@@ -1,13 +1,11 @@
-# Budg
+# budg
 
-Congratulations on taking hold of your financial freedom! The first step to building wealth is having a budgeting system that works _for_ you, so that you can focus on the important things in life.
+This project is still in early stages of development.
 
 This tool is meant to make budgets simpler by removing the need for spreadsheets and calculators. You simply outline your budget and whenever you get paid, just run the command and _voila!_ You have a guide that tells you exactly where your money needs to go! There are no servers or clouds involved, so you can rest easy knowing that your financial data is not being shared with anyone except yourself.
 
 ## Contents
 
-- [Budg](#budg)
-- [Contents](#contents)
 - [Installation](#installation)
   - [Uninstallation](#uninstallation)
 - [Usage](#usage)
@@ -23,47 +21,11 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
 
 ## Installation
 
-Budg can be installed using make.
-
-1. Download the repo
-2. cd into the repo
-3. run `make install`
-
-```text
-$ git clone https://github.com/kybouw/budg.git
-Cloning into 'budg'
-...
-$ cd budg
-$ make install
-...
-# Install Complete
-```
-
-This script will copy the python file to `~/.local/bin/budg` and make it executable.
+Coming soon...
 
 ### Uninstallation
 
-You can also use make to remove budg from your system.
-
-#### make clean
-
-To remove all trace of budg from your system. Deletes the python file in ~/bin and all configuration files in `~/.config/budg/`.
-
-```text
-$ make clean
-...
-# budg uninstalled
-```
-
-#### make clean-bin
-
-This will remove all budg files from your system except your budget plans. The files in `~/.config/budg/` will stay on your system.
-
-```text
-$ make clean-bin
-...
-# budg uninstalled
-```
+under construction
 
 ## Usage
 
