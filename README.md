@@ -21,11 +21,7 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
 
 ## Installation
 
-Coming soon...
-
-### Uninstallation
-
-under construction
+*Coming soon...*
 
 ## Usage
 
