@@ -1,4 +1,4 @@
-/*
+/* budg.cpp
  * budg - my app for budgeting my paychecks
  *
  * Copyright (C) 2020 Kyle Bouwman
