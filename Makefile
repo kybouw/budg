@@ -24,9 +24,9 @@
 .PHONY: all install clean clean-bin
 
 all:
-	# You find a strange lantern. You hold it by your ear and shake it around 
-	# to hear if anything is inside. You hear a faint voice whisper a
-	fortune
+	@echo 'You find a strange lantern. You hold it by your ear and shake it around' 
+	@echo 'You hear a faint voice whisper...'
+	@fortune
 
 
 install: src/budg.py src/defaultplan.ini
