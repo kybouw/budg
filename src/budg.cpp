@@ -19,7 +19,7 @@
  * along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
  */
 
-#include <cstdio>
+#include <iostream>
 #include <string>
 #include "plan.hpp"
 #include "config.hpp"
@@ -28,32 +28,45 @@
 
 int main(int argc, char** argv) {
 
-    if(argc == 1) {
-        printf("Hello, world!\n");
-        return 0;
-    }
+    Budg session = Budg();
+    session.pass_args(argc - 1, argv + 1);
 
-    int vals = argc - 1;
-    uint pennies = 0;
-    for(int i = 0; i < vals; i++) {
-        pennies += verify_amount(argv[i + 1]);
-    }
-
-    printf("Amount entered: %s\n", toDollars(pennies).c_str());
+    std::cout << "Amount entered: " << session.get_total() << std::endl;
 
     return 0;
 }
 
-uint verify_amount(char* s) {
-    return (uint)(std::stod(s) * 100);
+Budg::Budg() {
+    cfg = new Config();
+    plan = new Plan();
+    total_income = 0;
 }
 
-string toDollars(const uint & pennies) {
+Budg::~Budg() {
+    delete cfg;
+    delete plan;
+}
 
-    uint dollars = pennies / 100;
-    uint cents = pennies % 100;
+void Budg::pass_args(int argc, char** argv) {
+    for(int i = 0; i < argc; ++i) {
+        total_income += std::stod(argv[i]) * 100;
+    }
+}
 
-    string cents_str;
+int Budg::get_total_income() {
+    return total_income;
+}
+
+std::string Budg::get_total() {
+    return to_dollars(total_income);
+}
+
+std::string to_dollars(const int & pennies) {
+
+    int dollars = pennies / 100;
+    int cents = pennies % 100;
+
+    std::string cents_str;
     if(cents < 10) {
         cents_str = "0" + std::to_string(cents);
     }
@@ -61,6 +74,6 @@ string toDollars(const uint & pennies) {
         cents_str = std::to_string(cents);
     }
 
-    string s = "$" + std::to_string(dollars) + "." + cents_str;
+    std::string s = "$" + std::to_string(dollars) + "." + cents_str;
     return s;
 }
