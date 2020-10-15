@@ -21,6 +21,6 @@ class Budg {
 
 };
 
-std::string to_dollars(const int & pennies);
+std::string to_dollars(int pennies);
 
 #endif

@@ -61,19 +61,16 @@ std::string Budg::get_total() {
     return to_dollars(total_income);
 }
 
-std::string to_dollars(const int & pennies) {
+std::string to_dollars(int pennies) {
 
     int dollars = pennies / 100;
     int cents = pennies % 100;
 
-    std::string cents_str;
-    if(cents < 10) {
-        cents_str = "0" + std::to_string(cents);
-    }
-    else {
-        cents_str = std::to_string(cents);
-    }
+    std::string dollar_str = std::to_string(dollars);
+    std::string cents_str = std::to_string(cents);
 
-    std::string s = "$" + std::to_string(dollars) + "." + cents_str;
-    return s;
+    // add leading zero to decimal part
+    if(cents < 10) cents_str = "0" + cents_str;
+
+    return "$" + dollar_str + "." + cents_str;
 }
