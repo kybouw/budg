@@ -21,6 +21,8 @@
 
 #include <cstdio>
 #include <string>
+#include "plan.hpp"
+#include "config.hpp"
 #include "budg.hpp"
 
 
