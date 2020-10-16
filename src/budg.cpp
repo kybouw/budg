@@ -21,6 +21,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include "lineitem.hpp"
 #include "plan.hpp"
 #include "config.hpp"
 #include "budg.hpp"
@@ -30,6 +32,9 @@ int main(int argc, char** argv) {
 
     Budg session = Budg();
     session.pass_args(argc - 1, argv + 1);
+
+    std::cout << "Loading Session..." << std::endl;
+    std::cout << "Plan name: " << session.get_plan()->get_name() << std::endl;
 
     std::cout << "Amount entered: " << session.get_total() << std::endl;
 
@@ -73,4 +78,8 @@ std::string to_dollars(int pennies) {
     if(cents < 10) cents_str = "0" + cents_str;
 
     return "$" + dollar_str + "." + cents_str;
+}
+
+Plan* Budg::get_plan() {
+    return this->plan;
 }

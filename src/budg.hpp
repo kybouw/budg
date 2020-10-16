@@ -18,6 +18,7 @@ class Budg {
         void add_income(int income);
         int get_total_income();
         std::string get_total();
+        Plan* get_plan();
 
 };
 
