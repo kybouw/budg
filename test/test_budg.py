@@ -1,7 +1,7 @@
 import configparser
 import os.path
 
-from src import budg
+from budg import budg
 
 
 def getBudgitPlan():
