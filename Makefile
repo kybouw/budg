@@ -3,7 +3,7 @@
 ################################################################################
 # budg - my python script for budgeting my paychecks
 #
-# Copyright (C) 2020 Kyle Bouwman
+# Copyright (C) 2020-2022 Kyle Bouwman
 #
 # This file is part of budg.
 #
@@ -29,18 +29,18 @@ all:
 	@fortune
 
 
-install: src/budg.py src/defaultplan.ini
+install: budg/budg.py budg/defaultplan.ini
 
 	# Creating directories...
 	mkdir -p ~/.local/bin
 	mkdir -p ~/.config/budg
 
 	# Copying program...
-	cp src/budg.py ~/.local/bin/budg
+	cp budg/budg.py ~/.local/bin/budg
 	chmod u+x ~/.local/bin/budg
 
 	# Copying config...
-	cp src/defaultplan.ini ~/.config/budg/defaultplan.ini
+	cp budg/defaultplan.ini ~/.config/budg/defaultplan.ini
 
 	# Install Complete.
 
