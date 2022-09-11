@@ -21,29 +21,12 @@
 # along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
 ################################################################################
 
-.PHONY: all install clean clean-bin
+.PHONY: all clean clean-bin
 
 all:
 	@echo 'You find a strange lantern. You hold it by your ear and shake it around' 
 	@echo 'You hear a faint voice whisper...'
 	@fortune
-
-
-install: budg/budg.py budg/defaultplan.ini
-
-	# Creating directories...
-	mkdir -p ~/.local/bin
-	mkdir -p ~/.config/budg
-
-	# Copying program...
-	cp budg/budg.py ~/.local/bin/budg
-	chmod u+x ~/.local/bin/budg
-
-	# Copying config...
-	cp budg/defaultplan.ini ~/.config/budg/defaultplan.ini
-
-	# Install Complete.
-
 
 clean:
 	# Removing budg...
