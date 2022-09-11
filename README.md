@@ -23,46 +23,35 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
 
 ## Installation
 
-Budg can be installed using make.
+Budg can be installed using the bash script `install.sh`.
 
 1. Download the repo
 2. cd into the repo
-3. run `make install`
+3. run `./install.sh`
 
 ```text
 $ git clone https://github.com/kybouw/budg.git
 Cloning into 'budg'
 ...
 $ cd budg
-$ make install
+$ ./install.sh
 ...
-# Install Complete
+Install succeeded
 ```
 
 This script will copy the python file to `~/.local/bin/budg` and make it executable.
 
 ### Uninstallation
 
-You can also use make to remove budg from your system.
+You can also use `install.sh -u` to remove all traces of budg from your system.
 
-#### make clean
-
-To remove all trace of budg from your system. Deletes the python file in ~/bin and all configuration files in `~/.config/budg/`.
-
-```text
-$ make clean
-...
-# budg uninstalled
-```
-
-#### make clean-bin
-
-This will remove all budg files from your system except your budget plans. The files in `~/.config/budg/` will stay on your system.
+Deletes the python file in ~/bin and all configuration files in `~/.config/budg/`.
+**Make sure to copy your `plan.ini` file somewhere else if you want to save it!**
 
 ```text
-$ make clean-bin
+$ ./install.sh -u
 ...
-# budg uninstalled
+budg uninstalled
 ```
 
 ## Usage
@@ -170,7 +159,7 @@ This is the "fun" category. It includes all of the things that you **_want_**, b
 
 ## License Notice
 
-Copyright (C) 2020 Kyle Bouwman
+Copyright (C) 2020-2022 Kyle Bouwman
 
 Budg is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
