@@ -11,12 +11,12 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # budg is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
 ################################################################################
@@ -29,10 +29,19 @@ PLAN_DIR_LOCATION="${HOME}/.config/budg"
 EXE_SRC_LOCATION="./budg/budg.py"
 DEFAULTPLAN_SRC_LOCATION="./budg/defaultplan.ini"
 
+function show_usage {
+    echo "budg installation script"
+    echo "Usage: install.sh {-u|-h}"
+    echo "With no options, this script will install budg"
+    echo "Options:"
+    echo "   -u uninstall budg"
+    echo "   -h display this help screen"
+}
+
 ## checks to make sure that source files are present where expected
 #  return 1 if a file is missing
 #  return 0 if both files are present
-function verify_dependencies {
+function verify_install_dependencies {
     echo "Verifying files are present..."
 
     # check exe exists
@@ -71,7 +80,7 @@ function copy_files {
     # copy exe to install location and make executable
     cp "${EXE_SRC_LOCATION}" "${EXE_LOCATION}"
     chmod u+x "${EXE_LOCATION}"
-    
+
     # copy default plan to install location
     cp "${DEFAULTPLAN_SRC_LOCATION}" "${PLAN_DIR_LOCATION}"
 
@@ -82,8 +91,44 @@ function install_failure {
     exit
 }
 
-verify_dependencies || install_failure
+function install_program {
+    verify_install_dependencies || install_failure
 
-create_dirs || install_failure
+    create_dirs || install_failure
 
-copy_files && echo "Install succeeded"
+    copy_files && echo "Install succeeded"
+}
+
+function delete_files {
+    echo "Removing files..."
+    if [ -f "${EXE_LOCATION}" ]; then
+        rm "${EXE_LOCATION}"
+    fi
+    if [ -d "${PLAN_DIR_LOCATION}" ]; then
+        rm -r "${PLAN_DIR_LOCATION}"
+    fi
+}
+
+function uninstall_program {
+    delete_files && echo "budg uninstalled"
+}
+
+optstring=":hu"
+while getopts "$optstring" option; do
+    case "${option}" in
+    h) # display help
+        show_usage
+        exit
+        ;;
+    u) # uninstall
+        uninstall_program
+        exit
+        ;;
+    \?) # invalid option
+        echo "option not recognized: -${OPTARG}"
+        show_usage
+        exit
+        ;;
+    esac
+done
+install_program
