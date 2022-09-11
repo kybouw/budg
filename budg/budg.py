@@ -31,15 +31,15 @@ import math
 
 # function that handles input errors
 def usage_error():
-    print('Usage: budget XXX.XX')
-    print('Invalid argument')
+    print("Usage: budget XXX.XX")
+    print("Invalid argument")
     exit(1)
 
 
 # handles program execution and input
 def main(argc, argv):
 
-    if(argc == 1):
+    if argc == 1:
         # TODO init interactive mode
         usage_error()
 
@@ -63,7 +63,7 @@ def main(argc, argv):
 
 # helper function for truncating decimals
 def truncateDollars(val):
-    if(val == float("inf") or val == float("-inf")):
+    if val == float("inf") or val == float("-inf"):
         return val
     factor = 100
     return math.floor(val * factor) / factor
@@ -99,7 +99,7 @@ def printBudgit(budgit):
             name = item
             val = budgit[category][item]
 
-            if(name != "total"):
+            if name != "total":
                 total += val
             # TODO look into f-string formatting: justify/width + decimal
             print(f"  {name}        ${val:.2f}")
@@ -112,9 +112,9 @@ def printBudgit(budgit):
 def readFile():
 
     # create vars
-    userhome = os.path.expanduser('~')
-    userconfig = os.path.join(userhome, '.config/budg/plan.ini')
-    defaultconfig = os.path.join(userhome, '.config/budg/defaultplan.ini')
+    userhome = os.path.expanduser("~")
+    userconfig = os.path.join(userhome, ".config/budg/plan.ini")
+    defaultconfig = os.path.join(userhome, ".config/budg/defaultplan.ini")
 
     filedata = configparser.ConfigParser()
 
