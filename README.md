@@ -7,19 +7,19 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
 ## Contents
 
 - [Budg](#budg)
-- [Contents](#contents)
-- [Installation](#installation)
-  - [Uninstallation](#uninstallation)
-- [Usage](#usage)
-  - [Plans](#plans)
-    - [~/.config/budg/plan.ini](#configbudgplanini)
-    - [~/.config/budg/defaultplan.ini](#configbudgdefaultplanini)
-  - [Budgits](#budgits)
-- [The 50/20/30 Plan](#the-502030-plan)
-  - [Necessities - 50%](#necessities---50)
-  - [Savings - 20%](#savings---20)
-  - [Discretionary - 30%](#discretionary---30)
-- [License Notice](#license-notice)
+  - [Contents](#contents)
+  - [Installation](#installation)
+    - [Uninstallation](#uninstallation)
+  - [Usage](#usage)
+    - [Plans](#plans)
+      - [~/.config/budg/defaultplan.ini](#configbudgdefaultplanini)
+      - [~/.config/budg/plan.ini](#configbudgplanini)
+    - [Budgits](#budgits)
+  - [The 50/20/30 Plan](#the-502030-plan)
+    - [Necessities - 50%](#necessities---50)
+    - [Savings - 20%](#savings---20)
+    - [Discretionary - 30%](#discretionary---30)
+  - [License Notice](#license-notice)
 
 ## Installation
 
