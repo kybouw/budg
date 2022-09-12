@@ -45,7 +45,7 @@ This script will copy the python file to `~/.local/bin/budg` and make it executa
 
 You can also use `install.sh -u` to remove all traces of budg from your system.
 
-Deletes the python file in ~/bin and all configuration files in `~/.config/budg/`.
+Deletes the python file in `~/.local/bin` and the entire budg directory in `~/.config`.
 **Make sure to copy your `plan.ini` file somewhere else if you want to save it!**
 
 ```text
