@@ -24,9 +24,14 @@
 
 # imports
 import configparser
-import os.path
+import os
 import sys
 import math
+
+# CONSTANTS
+PLAN_DIRECTORY = os.path.join(os.path.expanduser("~"), "Documents", "budg")
+USER_PLAN_FILENAME = "plan.ini"
+DEFAULT_PLAN_FILENAME = "defaultplan.ini"
 
 
 # function that handles input errors
@@ -107,30 +112,22 @@ def printBudgit(budgit):
     return total
 
 
-# look in the default budgit plan location and parse a plan.ini file there
-# File -> ConfigParser
-def readFile():
+def readFile(
+    directory: os.PathLike = PLAN_DIRECTORY,
+    user_filename: os.PathLike = USER_PLAN_FILENAME,
+    default_filename: os.PathLike = DEFAULT_PLAN_FILENAME,
+) -> configparser.ConfigParser:
+    """Parses data from plan file"""
 
-    # create vars
-    userhome = os.path.expanduser("~")
-    userconfig = os.path.join(userhome, ".config/budg/plan.ini")
-    defaultconfig = os.path.join(userhome, ".config/budg/defaultplan.ini")
+    file_path = os.path.join(directory, user_filename)
+    if not os.path.isfile(file_path):
+        file_path = os.path.join(directory, default_filename)
+        if not os.path.isfile(file_path):
+            print(f"No config found. Please create one in '{directory}'.")
+            exit(2)
 
     filedata = configparser.ConfigParser()
-
-    # if user config file exists
-    if os.path.isfile(userconfig):
-        filedata.read(userconfig)
-
-    # user config does not exist, so try default config
-    elif os.path.isfile(defaultconfig):
-        filedata.read(defaultconfig)
-
-    # no config exists
-    else:
-        print("No config is found. Please create one in ~/.config/budg/")
-        exit(2)
-
+    filedata.read(file_path)
     return filedata
 
 

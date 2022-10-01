@@ -24,7 +24,7 @@
 ## globals
 EXE_DIR_LOCATION="${HOME}/.local/bin"
 EXE_LOCATION="${EXE_DIR_LOCATION}/budg"
-PLAN_DIR_LOCATION="${HOME}/.config/budg"
+PLAN_DIR_LOCATION="${HOME}/Documents/budg"
 # dependencies
 EXE_SRC_LOCATION="./budg/budg.py"
 DEFAULTPLAN_SRC_LOCATION="./budg/defaultplan.ini"
