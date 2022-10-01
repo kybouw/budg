@@ -12,8 +12,8 @@ This tool is meant to make budgets simpler by removing the need for spreadsheets
     - [Uninstallation](#uninstallation)
   - [Usage](#usage)
     - [Plans](#plans)
-      - [~/.config/budg/defaultplan.ini](#configbudgdefaultplanini)
-      - [~/.config/budg/plan.ini](#configbudgplanini)
+      - [~/Documents/budg/defaultplan.ini](#documentsbudgdefaultplanini)
+      - [~/Documents/budg/plan.ini](#documentsbudgplanini)
     - [Budgits](#budgits)
   - [The 50/20/30 Plan](#the-502030-plan)
     - [Necessities - 50%](#necessities---50)
@@ -45,7 +45,7 @@ This script will copy the python file to `~/.local/bin/budg` and make it executa
 
 You can also use `install.sh -u` to remove all traces of budg from your system.
 
-Deletes the python file in `~/.local/bin` and the entire budg directory in `~/.config`.
+Deletes the python file in `~/.local/bin` and the entire budg directory in `~/Documents`.
 **Make sure to copy your `plan.ini` file somewhere else if you want to save it!**
 
 ```text
@@ -72,21 +72,21 @@ Using budg is easy, but there are a few things you need to know in order to make
 
 Budg uses _plans_ to divide your income into categories. A [_plan_](#plans) is a set of rules that outlines your budget. Budg divides your income into weighted categories as defined by your plan. The result of this division is called a [_budgit_](#budgits).
 
-You can change your plan by modifying `~/.config/budg/plan.ini`.
+You can change your plan by modifying `~/Documents/budg/plan.ini`.
 
 ### Plans
 
-Plans are documents that outline your budget. They tell budg how you want your money to be spent. These documents are stored in `~/.config/budg/`. The installer (`make install`) will create a default plan file for you.
+Plans are documents that outline your budget. They tell budg how you want your money to be spent. These documents are stored in `~/Documents/budg/`. The installer (`make install`) will create a default plan file for you.
 
-#### ~/.config/budg/defaultplan.ini
+#### ~/Documents/budg/defaultplan.ini
 
-This file is in the budg repository. The installation script copies this file to `~/.config/budg/defaultplan.ini`. It is a general implementation of [the 50/20/30 plan](#the-502030-plan).
+This file is in the budg repository. The installation script copies this file to `~/Documents/budg/defaultplan.ini`. It is a general implementation of [the 50/20/30 plan](#the-502030-plan).
 
-#### ~/.config/budg/plan.ini
+#### ~/Documents/budg/plan.ini
 
-`~/.config/budg/plan.ini` is an outline of your budget. It contains all of the information needed to figure out where your money belongs. Plans are the key to budgeting; deciding where your money belongs before you spend it is what brings you financial security and peace of mind.
+`~/Documents/budg/plan.ini` is an outline of your budget. It contains all of the information needed to figure out where your money belongs. Plans are the key to budgeting; deciding where your money belongs before you spend it is what brings you financial security and peace of mind.
 
-Plans are `ini` files and are stored inside your home directory (inside the path `~/.config/budg/`). : `defaultplan.ini` and `plan.ini`.
+Plans are `ini` files and are stored inside your home directory (inside the path `~/Documents/budg/`). : `defaultplan.ini` and `plan.ini`.
 
 ### Budgits
 
