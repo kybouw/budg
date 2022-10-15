@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-###############################################################################
+########################################################################
 # budg - my python script for budgeting my paychecks
 #
 # Copyright (C) 2022 Kyle Bouwman
@@ -19,14 +19,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
-###############################################################################
+########################################################################
 
 
 # imports
-import configparser
 import os
 import sys
 import math
+import configparser
 
 # CONSTANTS
 PLAN_DIRECTORY = os.path.join(os.path.expanduser("~"), "Documents", "budg")
@@ -34,85 +34,14 @@ USER_PLAN_FILENAME = "plan.ini"
 DEFAULT_PLAN_FILENAME = "defaultplan.ini"
 
 
-# function that handles input errors
-def usage_error():
+def usage_error() -> None:
+    """Displays usage information"""
     print("Usage: budget XXX.XX")
     print("Invalid argument")
     exit(1)
 
 
-# handles program execution and input
-def main(argc, argv):
-
-    if argc == 1:
-        # TODO init interactive mode
-        usage_error()
-
-    # multiple values: budget their sum
-    # amount = sum(float(val) for val in argv[1:])
-    amount = 0.0
-    for val in argv[1:]:
-
-        try:
-            val = float(val)
-        except ValueError:
-            usage_error()
-
-        amount += val
-
-    plan_cfg = readFile()
-    plan = parsePlan(plan_cfg)
-    budgit = calcBudgit(plan, amount)
-    printBudgit(budgit)
-
-
-# helper function for truncating decimals
-def truncateDollars(val):
-    if val == float("inf") or val == float("-inf"):
-        return val
-    factor = 100
-    return math.floor(val * factor) / factor
-
-
-# applies the budgit plan to the amount
-# plan -> budgit
-def calcBudgit(plan, total):
-
-    budgit = {}
-
-    for category in plan:
-        line_items = {}
-
-        for item in plan[category]:
-            value = float(plan[category][item]) * total
-            value = truncateDollars(value)
-            line_items[item] = value
-
-        budgit[category] = line_items
-
-    return budgit
-
-
-# prints the budgit object
-# budgit -> output
-def printBudgit(budgit):
-
-    total = 0.0
-    for category in budgit:
-        print(category)
-        for item in budgit[category]:
-            name = item
-            val = budgit[category][item]
-
-            if name != "total":
-                total += val
-            # TODO look into f-string formatting: justify/width + decimal
-            print(f"  {name}        ${val:.2f}")
-
-    return total
-
-
-def readFile(
+def read_file(
     directory: os.PathLike = PLAN_DIRECTORY,
     user_filename: os.PathLike = USER_PLAN_FILENAME,
     default_filename: os.PathLike = DEFAULT_PLAN_FILENAME,
@@ -131,9 +60,8 @@ def readFile(
     return filedata
 
 
-# turns file data from configparser to a budgit plan
-# ConfigParser -> plan
-def parsePlan(filedata):
+def parse_plan(filedata: configparser.ConfigParser) -> dict:
+    """Interprets file data into a budget plan"""
 
     plan = {}
     for section in filedata.sections():
@@ -143,6 +71,71 @@ def parsePlan(filedata):
         plan[section] = line_items
 
     return plan
+
+
+def calculate_budget(plan: dict, total: float) -> dict:
+    """Calculates budget amounts based on plan for the given total"""
+
+    budgit = {}
+
+    def truncate_dollars(val: float) -> float:
+        """Helper: Truncates decimals to the hundredths place"""
+
+        if val == float("inf") or val == float("-inf"):
+            return val
+        factor = 100
+        return math.floor(val * factor) / factor
+
+    for category in plan:
+        line_items = {}
+
+        for item in plan[category]:
+            value = float(plan[category][item]) * total
+            value = truncate_dollars(value)
+            line_items[item] = value
+
+        budgit[category] = line_items
+
+    return budgit
+
+
+def print_budget(budget: dict) -> float:
+    """Prints calculated budget to screen"""
+
+    total = 0.0
+    for category in budget:
+        print(category)
+        for item in budget[category]:
+            name = item
+            val = budget[category][item]
+
+            if name != "total":
+                total += val
+            print(f"  {name}        ${val:.2f}")
+
+    return total
+
+
+def main(argc, argv) -> None:
+    """Driver function"""
+
+    if argc == 1:
+        usage_error()
+
+    amount = 0.0
+    for val in argv[1:]:
+
+        try:
+            val = float(val)
+        except ValueError:
+            usage_error()
+
+        amount += val
+
+    plan_cfg = read_file()
+    plan = parse_plan(plan_cfg)
+    budget = calculate_budget(plan, amount)
+    print_budget(budget)
 
 
 if __name__ == "__main__":
