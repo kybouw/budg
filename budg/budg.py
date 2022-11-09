@@ -42,9 +42,9 @@ def usage_error() -> None:
 
 
 def read_file(
-    directory: os.PathLike = PLAN_DIRECTORY,
-    user_filename: os.PathLike = USER_PLAN_FILENAME,
-    default_filename: os.PathLike = DEFAULT_PLAN_FILENAME,
+    directory: str = PLAN_DIRECTORY,
+    user_filename: str = USER_PLAN_FILENAME,
+    default_filename: str = DEFAULT_PLAN_FILENAME,
 ) -> configparser.ConfigParser:
     """Parses data from plan file"""
 
