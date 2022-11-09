@@ -26,12 +26,13 @@
 import os
 import sys
 import math
-import configparser
+from typing import Any
+import tomli
 
 # CONSTANTS
 PLAN_DIRECTORY = os.path.join(os.path.expanduser("~"), "Documents", "budg")
-USER_PLAN_FILENAME = "plan.ini"
-DEFAULT_PLAN_FILENAME = "defaultplan.ini"
+USER_PLAN_FILENAME = "plan.toml"
+DEFAULT_PLAN_FILENAME = "defaultplan.toml"
 
 
 def usage_error() -> None:
@@ -45,7 +46,7 @@ def read_file(
     directory: str = PLAN_DIRECTORY,
     user_filename: str = USER_PLAN_FILENAME,
     default_filename: str = DEFAULT_PLAN_FILENAME,
-) -> configparser.ConfigParser:
+) -> dict[str, Any]:
     """Parses data from plan file"""
 
     file_path = os.path.join(directory, user_filename)
@@ -55,22 +56,10 @@ def read_file(
             print(f"No config found. Please create one in '{directory}'.")
             exit(2)
 
-    filedata = configparser.ConfigParser()
-    filedata.read(file_path)
+    with open(file_path, "rb") as file:
+        filedata = tomli.load(file)
+
     return filedata
-
-
-def parse_plan(filedata: configparser.ConfigParser) -> dict:
-    """Interprets file data into a budget plan"""
-
-    plan = {}
-    for section in filedata.sections():
-        line_items = {}
-        for item in filedata[section]:
-            line_items[item] = filedata[section][item]
-        plan[section] = line_items
-
-    return plan
 
 
 def calculate_budget(plan: dict, total: float) -> dict:
@@ -116,10 +105,10 @@ def print_budget(budget: dict) -> float:
     return total
 
 
-def main(argc, argv) -> None:
+def main(argv) -> None:
     """Driver function"""
 
-    if argc == 1:
+    if len(argv) == 1:
         usage_error()
 
     amount = 0.0
@@ -132,11 +121,11 @@ def main(argc, argv) -> None:
 
         amount += val
 
-    plan_cfg = read_file()
-    plan = parse_plan(plan_cfg)
+    plan = read_file()
     budget = calculate_budget(plan, amount)
     print_budget(budget)
 
 
 if __name__ == "__main__":
-    main(len(sys.argv), sys.argv)
+    main(sys.argv)
+    # main(["budg.py", "100"])  # XXX testing
