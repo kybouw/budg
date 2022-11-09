@@ -1,4 +1,4 @@
-import configparser
+import tomli
 import os.path
 
 from budg import budg
@@ -6,12 +6,15 @@ from budg import budg
 
 def get_budget_plan():
 
-    config = configparser.ConfigParser()
-    def_plan_path = os.path.join(os.path.curdir, "testplan.ini")
-    if os.path.isfile(def_plan_path):
-        config.read(def_plan_path)
+    def_plan_path = os.path.join(os.path.curdir, "test", "testplan.toml")
 
-    plan = budg.parse_plan(config)
+    if not os.path.isfile(def_plan_path):
+        print("Missing plan file")
+        exit(1)
+
+    with open(def_plan_path, "rb") as f:
+        plan = tomli.load(f)
+
     return plan
 
 

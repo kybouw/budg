@@ -62,7 +62,7 @@ def read_file(
     return filedata
 
 
-def calculate_budget(plan: dict, total: float) -> dict:
+def calculate_budget(plan: dict[str, Any], total: float) -> dict:
     """Calculates budget amounts based on plan for the given total"""
 
     budgit = {}
