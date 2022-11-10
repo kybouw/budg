@@ -3,14 +3,14 @@
 A simple percentage-based budget calculator.
 
 - [Budg](#budg)
-- [Installation](#installation)
-  - [Uninstallation](#uninstallation)
-- [Usage](#usage)
-  - [Plans](#plans)
-  - [The 50/20/30 Plan](#the-502030-plan)
-- [License Notice](#license-notice)
+  - [Installation](#installation)
+    - [Uninstallation](#uninstallation)
+  - [Usage](#usage)
+    - [Plans](#plans)
+    - [The 50/20/30 Plan](#the-502030-plan)
+  - [License Notice](#license-notice)
 
-# Installation
+## Installation
 
 Budg can be installed using the bash script `install.sh`.
 
@@ -31,7 +31,7 @@ Install succeeded
 This script will copy the python file to `~/.local/bin/budg` and make it executable.
 Then, it will create the `budg` directory in your `Documents` folder and copy the default plan file there.
 
-## Uninstallation
+### Uninstallation
 
 You can also use `install.sh -u` to remove all traces of budg from your system.
 
@@ -44,7 +44,7 @@ $ ./install.sh -u
 budg uninstalled
 ```
 
-# Usage
+## Usage
 
 Once [installed](#installation), you can run your income through budg right away using the `budg` command. For example, say you want to budget $100.00 in income:
 
@@ -76,7 +76,7 @@ Budg divides your income into these weighted categories as defined by your plan.
 
 You can change your plan by modifying `~/Documents/budg/plan.toml`.
 
-## Plans
+### Plans
 
 Plans are toml files in `~/Documents/budg/` that outline your budget. Create categories (and subcategories!) and assign each one a percentage.
 
@@ -123,7 +123,7 @@ Discretionary
 
 A default budget plan based on [the 50/20/30 plan](#the-502030-plan) is created when you install budg.
 
-## The 50/20/30 Plan
+### The 50/20/30 Plan
 
 The 50/20/30 plan is basic budget starting point that should work for most people. It can be easily modified to fit your lifestyle, and I encourage you to find a plan that fits your needs and priorities.
 
@@ -143,7 +143,7 @@ You can also read more about the 50/20/30 budget [on Investopedia.](https://www.
 
 I hope this quick little guide helped you get familiar with the 50/20/30 budget and inspired ideas that you can implement in your own plan.
 
-# License Notice
+## License Notice
 
 Copyright (C) 2020-2022 Kyle Bouwman
 
