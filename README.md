@@ -1,27 +1,16 @@
 # Budg
 
-Congratulations on taking hold of your financial freedom! The first step to building wealth is having a budgeting system that works _for_ you, so that you can focus on the important things in life.
-
-This tool is meant to make budgets simpler by removing the need for spreadsheets and calculators. You simply outline your budget and whenever you get paid, just run the command and _voila!_ You have a guide that tells you exactly where your money needs to go! There are no servers or clouds involved, so you can rest easy knowing that your financial data is not being shared with anyone except yourself.
-
-## Contents
+A simple percentage-based budget calculator.
 
 - [Budg](#budg)
-  - [Contents](#contents)
-  - [Installation](#installation)
-    - [Uninstallation](#uninstallation)
-  - [Usage](#usage)
-    - [Plans](#plans)
-      - [~/Documents/budg/defaultplan.toml](#documentsbudgdefaultplantoml)
-      - [~/Documents/budg/plan.toml](#documentsbudgplantoml)
-    - [Budgits](#budgits)
+- [Installation](#installation)
+  - [Uninstallation](#uninstallation)
+- [Usage](#usage)
+  - [Plans](#plans)
   - [The 50/20/30 Plan](#the-502030-plan)
-    - [Necessities - 50%](#necessities---50)
-    - [Savings - 20%](#savings---20)
-    - [Discretionary - 30%](#discretionary---30)
-  - [License Notice](#license-notice)
+- [License Notice](#license-notice)
 
-## Installation
+# Installation
 
 Budg can be installed using the bash script `install.sh`.
 
@@ -40,13 +29,14 @@ Install succeeded
 ```
 
 This script will copy the python file to `~/.local/bin/budg` and make it executable.
+Then, it will create the `budg` directory in your `Documents` folder and copy the default plan file there.
 
-### Uninstallation
+## Uninstallation
 
 You can also use `install.sh -u` to remove all traces of budg from your system.
 
 Deletes the python file in `~/.local/bin` and the entire budg directory in `~/Documents`.
-**Make sure to copy your `plan.toml` file somewhere else if you want to save it!**
+**Make sure to save your `plan.toml` file in a safe place if you want to keep it!**
 
 ```text
 $ ./install.sh -u
@@ -54,62 +44,21 @@ $ ./install.sh -u
 budg uninstalled
 ```
 
-## Usage
+# Usage
 
-Once [installed](#installation), you can run your income through budg right away using the `budg <amount>` command. For example, to use the default budg plan to budget $123.00 in income:
+Once [installed](#installation), you can run your income through budg right away using the `budg` command. For example, say you want to budget $100.00 in income:
 
 ```text
-$ budg 123
+$ budg 100
 Necessities
-  total        $61.50
+  total        $50.00
 Savings
-  total        $24.60
+  total        $20.00
 Discretionary
-  total        $36.90
+  total        $30.00
 ```
 
-Using budg is easy, but there are a few things you need to know in order to make full use of budg.
-
-Budg uses _plans_ to divide your income into categories. A [_plan_](#plans) is a set of rules that outlines your budget. Budg divides your income into weighted categories as defined by your plan. The result of this division is called a [_budgit_](#budgits).
-
-You can change your plan by modifying `~/Documents/budg/plan.toml`.
-
-### Plans
-
-Plans are documents that outline your budget. They tell budg how you want your money to be spent. These documents are stored in `~/Documents/budg/`. The installer (`make install`) will create a default plan file for you.
-
-#### ~/Documents/budg/defaultplan.toml
-
-This file is in the budg repository. The installation script copies this file to `~/Documents/budg/defaultplan.toml`. It is a general implementation of [the 50/20/30 plan](#the-502030-plan).
-
-#### ~/Documents/budg/plan.toml
-
-`~/Documents/budg/plan.toml` is an outline of your budget. It contains all of the information needed to figure out where your money belongs. Plans are the key to budgeting; deciding where your money belongs before you spend it is what brings you financial security and peace of mind.
-
-Plans are `toml` files and are stored inside your home directory (inside the path `~/Documents/budg/`). : `defaultplan.toml` and `plan.toml`.
-
-### Budgits
-
-You can easily execute the program from your command line. Simply type `budg` followed by your paycheck value(s).
-For example, show your budgit for a $123.45 paycheck like so:
-
-```text
-budg 123.45
-```
-
-Budg will then show you the amount of money that belongs in each item of your plan.
-
-```text
-$ budg 123.45
-Necessities
-  total        $61.72
-Savings
-  total        $24.69
-Discretionary
-  total        $37.03
-```
-
-You can also input multiple paychecks at once:
+You can also input multiple incomes at once. Budg will sum them for you:
 
 ```text
 $ budg 123.45 543.21 987.54
@@ -121,43 +70,80 @@ Discretionary
   total        $496.26
 ```
 
+Budg uses _plans_ to divide your income into categories.
+A [_plan_](#plans) is simply a set of named categories and percentages that outline your budget.
+Budg divides your income into these weighted categories as defined by your plan.
+
+You can change your plan by modifying `~/Documents/budg/plan.toml`.
+
+## Plans
+
+Plans are toml files in `~/Documents/budg/` that outline your budget. Create categories (and subcategories!) and assign each one a percentage.
+
+Budg will divide your income by those percentages into each category and print the result.
+
+Here is an example of a `plan.toml` file:
+
+```toml
+[Necessities]
+rent = 0.30
+gas_auto = 0.20
+total = 0.50
+
+[Savings]
+investments = 0.10
+cash = 0.10
+total = 0.20
+
+[Discretionary]
+restaurants = 0.10
+entertainment = 0.10
+shopping = 0.10
+total = 0.30
+```
+
+Running budg with $100 would give us this output:
+
+```text
+$ budg 100
+Necessities
+  rent        $30.00
+  gas_auto        $20.00
+  total        $50.00
+Savings
+  investments        $10.00
+  cash        $10.00
+  total        $20.00
+Discretionary
+  restaurants        $10.00
+  entertainment        $10.00
+  shopping        $10.00
+  total        $30.00
+```
+
+A default budget plan based on [the 50/20/30 plan](#the-502030-plan) is created when you install budg.
+
 ## The 50/20/30 Plan
 
-To get started with budg, a default budgit plan is provided: the 50/20/30 plan, a simple budget system popularized by U.S. Senator Elizabeth Warren. This model can easily be modified to fit the your needs, which is why Budg uses it as a starting point for building budgit plans.
+The 50/20/30 plan is basic budget starting point that should work for most people. It can be easily modified to fit your lifestyle, and I encourage you to find a plan that fits your needs and priorities.
 
-The model works by defining 3 major spending categories: necessities, savings, and discretionary. Each category is given a weight (50%, 20%, and 30%, respectively). You take your total after-tax income and divide it into the categories according to weight, creating allowances for yourself. Once all of your allowances are calculated, you will know how every dollar you earned is going to work for you.
+The model works by defining 3 major spending categories: Necessities, Savings, and Discretionary.
+Necessities are things you _must_ have: food, shelter, utilities, medical expenses, transportation. If you need it to survive, or to earn more money, then it is a necessity.
+Savings is all about building wealth and working towards financial goals. This category includes debt payments, investments, and general savings. This is the most important category. _Pay yourself first!_
+Discretionary is all the nice-to-haves. Things like restaurants, bars, and fun activities.
 
-You are able to create your own budgit plans from the default plan. You can add or remove categories, change the weights of categories, and add subcategories to more precisely manage your income.
+Each category is given a weight (50%, 20%, and 30%, respectively).
+You take your total after-tax income and divide it into the categories according to weight, creating allowances for yourself. So, half of your income will go toward necessities. Twenty percent should go towards savings, and thirty percent towards discretionary.
 
-This guide will help you get familiar with the 50/20/30 budget and hopefully inspire ideas that you can implement in your own budgit plan.
+![The 50/20/30 budget](https://www.thebalance.com/thmb/T7aTgYvTRfglPtW9C2TZFJSeSZQ=/950x0/filters:format(webp)/the-50-30-20-rule-of-thumb-453922-final-5b61ec23c9e77c007be919e1-5ecfc51b09864e289b0ee3fa0d52422f.png)
 
-![The 50/20/30 budget](https://www.thebalance.com/thmb/T7aTgYvTRfglPtW9C2TZFJSeSZQ=/950x0/filters:format(webp)/the-50-30-20-rule-of-thumb-453922-final-5b61ec23c9e77c007be919e1-5ecfc51b09864e289b0ee3fa0d52422f.png)Image by (c) The Balance 2019. Their article on the 50/20/30 budget can be found [here](https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922).
+Image by (c) The Balance 2019.
+Their article on the 50/20/30 budget can be found [here](https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922).
+You can also read more about the 50/20/30 budget [on Investopedia.](https://www.investopedia.com/ask/answers/022916/what-502030-budget-rule.asp)
 
-### Necessities - 50%
+I hope this quick little guide helped you get familiar with the 50/20/30 budget and inspired ideas that you can implement in your own plan.
 
-Fifty percent of your after-tax income is meant for necessities. This includes anything that you cannot live without or anything you _must_ pay. Usually, this means things like rent, groceries, transportation, debt payments, insurance, and maybe your phone bill. Of course, you decide what belongs here, but make sure it only includes things that you **_need_**. Necessities is strictly the _must-have_ category and is typically the "boring" part of spending.
-
-Once you know how much you can spend on necessities, try to keep your spending under that amount. If you find that you are spending too much on necessities, consider ways to save. Maybe refinancing your mortgages or loans, finding a cheaper place to live, switching to more affordable insurance, etc. If you are spending significantly less than your allowance, then perhaps you could allocate some of that excess to your savings allowance.
-
-Upgrades to necessities often belong in the discretionary category. For example, the cost of the "premium" unlimited data phone plan over the most basic phone plan is a discretionary expense because you might _need_ a phone plan and not _need_ unlimited data. However, if your job requires you to stay on-call and online at all times, a premium phone plan could be considered a necessity. This category is all about _your_ needs!
-
-### Savings - 20%
-
-This is the most important part of any budget. At least twenty percent of your after-tax income is put into savings immediately after your paycheck hits your bank account. It's called **_paying yourself first_** (a.k.a **PYF**), and it is the key to financial security.
-
-Now, "saving" does not necessarily mean just putting money into a savings account. No, this category includes all of your long-term savings goals: retirement accounts, savings accounts, investments, emergency funds, etc.
-
-If you do not have one already, consider creating an emergency fund. An emergency fund is a savings account that will allow you to withdraw money when you need it, in case of emergencies that cause you to lose your income. You should have at least three months worth of your current income saved away in an emergency fund. Once your emergency fund is adequate, then you can pay more attention to your long term savings like retirement and investments.
-
-This is the category that builds your financial future and gives you the security and peace of mind that you deserve. The whole point of budgeting is to save money. Be very hesitant to move money out of this category unless it is an absolute emergency.
-
-### Discretionary - 30%
-
-This is the "fun" category. It includes all of the things that you **_want_**, but maybe do not need. It includes restaurants, alcohol and recreation, movies and concerts, travel, spiffy new clothes, or the latest smartphone. This category is not just stand-alone expenses, but also any upgrades to the Necessities category that you want. Say, a nicer car or a faster internet service plan. These are the things that are completely _optional_, things you can get by without. However, just because you do not need these expenses does not mean you should ignore this category. This is the part of your budget that pays for the things that make life more fun and enjoyable. Putting money towards the things you want (and knowing that you are not hurting the bank by doing so) is the most rewarding part of keeping a budget.
-
-[Read more about the 50/20/30 budget on Investopedia.](https://www.investopedia.com/ask/answers/022916/what-502030-budget-rule.asp)
-
-## License Notice
+# License Notice
 
 Copyright (C) 2020-2022 Kyle Bouwman
 
