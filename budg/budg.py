@@ -22,6 +22,7 @@
 ########################################################################
 
 
+import argparse
 import math
 import os
 import sys
@@ -104,14 +105,35 @@ def print_budget(budget: dict) -> float:
     return total
 
 
-def main(argv) -> None:
-    """Driver function"""
+def main(argv: list[str] = sys.argv) -> None:
+    """Driver function
+    Handles high level program setup and user interfacing.
+    """
 
-    if len(argv) == 1:
-        usage_error()
+    parser = argparse.ArgumentParser(description="Budget some dollars.")
+    parser.add_argument(
+        "values",
+        metavar="value",
+        type=str,
+        nargs="+",
+        help="the dollar amount you want to budget",
+    )
+    parser.add_argument(
+        "-p",
+        "--plan",
+        metavar="name",
+        type=str,
+        nargs="?",
+        help="select the budget plan to use",
+        default="plan",
+    )
+
+    args = parser.parse_args(argv[1:])
+    plan_name = args.plan
+    input_values = args.values
 
     amount = 0.0
-    for val in argv[1:]:
+    for val in input_values:
 
         try:
             val = float(val)
