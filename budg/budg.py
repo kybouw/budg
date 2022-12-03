@@ -42,24 +42,28 @@ def usage_error() -> None:
     exit(1)
 
 
-def read_file(
-    directory: str = PLAN_DIRECTORY,
-    user_filename: str = USER_PLAN_FILENAME,
-    default_filename: str = DEFAULT_PLAN_FILENAME,
-) -> dict[str, Any]:
-    """Parses data from plan file"""
+def get_path_to_plan(input: str, plan_dir: str = PLAN_DIRECTORY) -> str:
+    """Verifies path to plan file, or determines path based on name"""
 
-    file_path = os.path.join(directory, user_filename)
-    if not os.path.isfile(file_path):
-        file_path = os.path.join(directory, default_filename)
-        if not os.path.isfile(file_path):
-            print(f"No config found. Please create one in '{directory}'.")
-            exit(2)
+    # if input is a valid plan file, return that path
+    if os.path.isfile(input) and input.lower().endswith(".toml"):
+        return input
 
-    with open(file_path, "rb") as file:
-        filedata = tomli.load(file)
+    # quick helper
+    def normalize(s: str) -> str:
+        return s.lower().replace(".toml", "")
 
-    return filedata
+    # if input is a valid name of a plan file in plan dir,
+    #   return the formulated path
+    for item in os.scandir(plan_dir):
+        if not (item.is_file() and item.name.lower().endswith(".toml")):
+            continue
+        if normalize(item.name) == normalize(input):
+            return item.path
+
+    # input did not match
+    print(f"Could not find file specified by '{input}'")
+    raise FileNotFoundError()
 
 
 def calculate_budget(plan: dict[str, Any], total: float) -> dict:
@@ -127,14 +131,14 @@ def main(argv: list[str] = sys.argv) -> None:
         help="select the budget plan to use",
         default="plan",
     )
-
     args = parser.parse_args(argv[1:])
-    plan_name = args.plan
-    input_values = args.values
+
+    plan_path = get_path_to_plan(args.plan)
+    with open(plan_path, "rb") as file:
+        plan_obj = tomli.load(file)
 
     amount = 0.0
-    for val in input_values:
-
+    for val in args.values:
         try:
             val = float(val)
         except ValueError:
@@ -142,8 +146,7 @@ def main(argv: list[str] = sys.argv) -> None:
 
         amount += val
 
-    plan = read_file()
-    budget = calculate_budget(plan, amount)
+    budget = calculate_budget(plan_obj, amount)
     print_budget(budget)
 
 
