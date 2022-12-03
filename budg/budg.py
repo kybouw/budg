@@ -35,13 +35,6 @@ USER_PLAN_FILENAME = "plan.toml"
 DEFAULT_PLAN_FILENAME = "defaultplan.toml"
 
 
-def usage_error() -> None:
-    """Displays usage information"""
-    print("Usage: budget XXX.XX")
-    print("Invalid argument")
-    exit(1)
-
-
 def get_path_to_plan(input: str, plan_dir: str = PLAN_DIRECTORY) -> str:
     """Verifies path to plan file, or determines path based on name"""
 
@@ -140,11 +133,11 @@ def main(argv: list[str] = sys.argv) -> None:
     amount = 0.0
     for val in args.values:
         try:
-            val = float(val)
-        except ValueError:
-            usage_error()
-
-        amount += val
+            amount += float(val)
+        except ValueError as e:
+            print("Usage: budget XXX.XX")
+            print("Invalid argument")
+            raise ValueError("Could not understand number format") from e
 
     budget = calculate_budget(plan_obj, amount)
     print_budget(budget)
