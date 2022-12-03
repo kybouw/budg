@@ -22,14 +22,13 @@
 ########################################################################
 
 
-# imports
+import math
 import os
 import sys
-import math
 from typing import Any
+
 import tomli
 
-# CONSTANTS
 PLAN_DIRECTORY = os.path.join(os.path.expanduser("~"), "Documents", "budg")
 USER_PLAN_FILENAME = "plan.toml"
 DEFAULT_PLAN_FILENAME = "defaultplan.toml"
