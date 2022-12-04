@@ -125,20 +125,20 @@ Here is an example of a `plan.toml` file:
 
 ```toml
 [Necessities]
-rent = 0.30
-gas_auto = 0.20
-total = 0.50
+rent = 30
+gas_auto = 20
+total = 50
 
 [Savings]
-investments = 0.10
-cash = 0.10
-total = 0.20
+investments = 10
+cash = 10
+total = 20
 
 [Discretionary]
-restaurants = 0.10
-entertainment = 0.10
-shopping = 0.10
-total = 0.30
+restaurants = 10
+entertainment = 10
+shopping = 10
+total = 30
 ```
 
 Budg will use those percentages to divvy up your income and print the result.
