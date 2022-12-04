@@ -35,27 +35,33 @@ USER_PLAN_FILENAME = "plan.toml"
 DEFAULT_PLAN_FILENAME = "defaultplan.toml"
 
 
-def get_path_to_plan(input: str, plan_dir: str = PLAN_DIRECTORY) -> str:
+def get_path_to_plan(plan_name: str, plan_dir: str = PLAN_DIRECTORY) -> str:
     """Verifies path to plan file, or determines path based on name"""
 
-    # if input is a valid plan file, return that path
-    if os.path.isfile(input) and input.lower().endswith(".toml"):
-        return input
+    # helper
+    def is_valid_file(s: str) -> bool:
+        """Checks if s is a path to a valid plan toml file"""
+        return os.path.isfile(s) and s.lower().endswith(".toml")
 
-    # quick helper
+    # if plan_name is a valid plan file, return that path
+    if is_valid_file(plan_name):
+        return plan_name
+
+    # helper
     def normalize(s: str) -> str:
+        """Normalizes toml file names for comparison"""
         return s.lower().replace(".toml", "")
 
-    # if input is a valid name of a plan file in plan dir,
-    #   return the formulated path
+    # if plan_name is a valid name of a plan file in plan_dir,
+    #   return the path to that file
     for item in os.scandir(plan_dir):
-        if not (item.is_file() and item.name.lower().endswith(".toml")):
+        if not is_valid_file(item.path):
             continue
-        if normalize(item.name) == normalize(input):
+        if normalize(item.name) == normalize(plan_name):
             return item.path
 
-    # input did not match
-    print(f"Could not find file specified by '{input}'")
+    # plan_name did not match
+    print(f"Could not find file specified by '{plan_name}'")
     raise FileNotFoundError()
 
 
