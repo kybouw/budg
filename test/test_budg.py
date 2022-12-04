@@ -6,7 +6,7 @@ import os.path
 
 def get_budget_plan():
 
-    def_plan_path = os.path.join(os.path.curdir, "test", "testplan.toml")
+    def_plan_path = os.path.join(os.path.curdir, "test", "test.toml")
 
     if not os.path.isfile(def_plan_path):
         print("Missing plan file")

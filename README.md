@@ -37,7 +37,7 @@ Then, it will create the `budg` directory in your `Documents` folder and copy th
 You can also use `install.sh -u` to remove all traces of budg from your system.
 
 Deletes the python file in `~/.local/bin` and the entire budg directory in `~/Documents`.
-**Make sure to save your `plan.toml` file in a safe place if you want to keep it!**
+**Make sure to save your plan toml files in a safe place if you want to keep them!**
 
 ```text
 $ ./install.sh -u

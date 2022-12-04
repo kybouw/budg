@@ -27,7 +27,7 @@ EXE_LOCATION="${EXE_DIR_LOCATION}/budg"
 PLAN_DIR_LOCATION="${HOME}/Documents/budg"
 # dependencies
 EXE_SRC_LOCATION="./budg/budg.py"
-DEFAULTPLAN_SRC_LOCATION="./budg/defaultplan.toml"
+DEFAULTPLAN_SRC_LOCATION="./budg/default.toml"
 
 function show_usage {
     echo "budg installation script"
