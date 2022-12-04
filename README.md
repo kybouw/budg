@@ -7,6 +7,7 @@ A simple percentage-based budget calculator.
     - [Uninstallation](#uninstallation)
   - [Usage](#usage)
     - [Plans](#plans)
+      - [Creating a plan](#creating-a-plan)
     - [The 50/20/30 Plan](#the-502030-plan)
   - [License Notice](#license-notice)
 
@@ -46,7 +47,26 @@ budg uninstalled
 
 ## Usage
 
-Once [installed](#installation), you can run your income through budg right away using the `budg` command. For example, say you want to budget $100.00 in income:
+Standard usage message:
+
+```text
+$ python budg.py -h
+usage: budg.py [-h] [-p [name]] value [value ...]
+
+Budget some dollars.
+
+positional arguments:
+  value                 the dollar amount you want to budget
+
+options:
+  -h, --help            show this help message and exit
+  -p [name], --plan [name]
+                        select the budget plan to use
+```
+
+`budg` takes one positional argument, but you can optionally pass more.
+
+For example, to budget $100:
 
 ```text
 $ budg 100
@@ -58,7 +78,7 @@ Discretionary
   total        $30.00
 ```
 
-You can also input multiple incomes at once. Budg will sum them for you:
+And multiple values (total: $1654.20):
 
 ```text
 $ budg 123.45 543.21 987.54
@@ -70,17 +90,37 @@ Discretionary
   total        $496.26
 ```
 
-Budg uses _plans_ to divide your income into categories.
-A [_plan_](#plans) is simply a set of named categories and percentages that outline your budget.
+### Plans
+
+Budget plans are defined in toml files.
+The file simply states a set of named categories and percentages as decimal values between 0 and 1.
 Budg divides your income into these weighted categories as defined by your plan.
 
+Plan files are stored in `~/Documents/budg/`.
 You can change your plan by modifying `~/Documents/budg/plan.toml`.
+You can also tell budg to use a different plan file with the `-p`/`--plan` option.
 
-### Plans
+You can either use a path:
+
+```text
+$ budg -p /path/to/myplan.toml 100
+...
+```
+
+Or the name of a file in `~/Documents/budg/`:
+
+```text
+$ ls ~/Documents/budg
+plan.toml
+otherplan.toml
+$ budg -p otherplan 100
+...
+```
+
+#### Creating a plan
 
 Plans are toml files in `~/Documents/budg/` that outline your budget. Create categories (and subcategories!) and assign each one a percentage.
 
-Budg will divide your income by those percentages into each category and print the result.
 
 Here is an example of a `plan.toml` file:
 
@@ -102,7 +142,8 @@ shopping = 0.10
 total = 0.30
 ```
 
-Running budg with $100 would give us this output:
+Budg will use those percentages to divvy up your income and print the result.
+Budgeting $100 with the plan above would give us this output:
 
 ```text
 $ budg 100
@@ -120,6 +161,9 @@ Discretionary
   shopping        $10.00
   total        $30.00
 ```
+
+**NOTE:**
+The totals are not verified or calculated in any way, _so you are responsible for making sure you do not budget more than 100% of your income!_
 
 A default budget plan based on [the 50/20/30 plan](#the-502030-plan) is created when you install budg.
 
