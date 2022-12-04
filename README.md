@@ -121,7 +121,6 @@ $ budg -p otherplan 100
 
 Plans are toml files in `~/Documents/budg/` that outline your budget. Create categories (and subcategories!) and assign each one a percentage.
 
-
 Here is an example of a `plan.toml` file:
 
 ```toml
