@@ -78,8 +78,9 @@ def get_path_to_plan(plan_name: str, plan_dir: str = PLAN_DIRECTORY) -> str:
     raise FileNotFoundError()
 
 
-def calculate_budget(plan: dict[str, Any], total: float) -> dict:
-    """Calculates budget amounts based on plan for the given total
+def process_budget(plan: dict[str, Any], total: float) -> str:
+    """Creates output text using calculated budget amounts based on plan
+    for the given total
 
     Parameters
     ----------
@@ -90,57 +91,25 @@ def calculate_budget(plan: dict[str, Any], total: float) -> dict:
 
     Returns
     -------
-    dict
-        A map of budget items from the plan to it's calculated values
+    str
+        Formatted string with calculated budget values
     """
-    budgit = {}
-
-    def truncate_dollars(val: float) -> float:
-        """Helper: Truncates decimals to the hundredths place"""
-        if val == float("inf") or val == float("-inf"):
-            return val
-        factor = 100
-        return math.floor(val * factor) / factor
-
-    for category in plan:
-        line_items = {}
-
-        for item in plan[category]:
-            value = float(plan[category][item]) * total
-            value = truncate_dollars(value)
-            line_items[item] = value
-
-        budgit[category] = line_items
-
-    return budgit
-
-
-def print_budget(budget: dict) -> float:
-    """Prints calculated budget to screen
-
-    Parameters
-    ----------
-    budget: dict
-        A map of budget plan items to dollar amounts
-
-    Returns
-    -------
-    float
-        The total amount budgeted based on low-level plan items. Useful
-        for testing.
-    """
-    total = 0.0
-    for category in budget:
-        print(category)
-        for item in budget[category]:
-            name = item
-            val = budget[category][item]
-
-            if name != "total":
-                total += val
-            print(f"  {name}        ${val:.2f}")
-
-    return total
+    # plans follow a major/minor format
+    # There is major category that labels groups of budget categories,
+    #   and a minor category that labels individual budget categories
+    s = str()
+    for group in plan:
+        s += f"{group}\n"
+        for category in plan[group]:
+            # calculate the value of this category
+            ratio = plan[group][category] / 100
+            value = total * ratio
+            # truncate
+            trunc_factor = 100
+            value = math.floor(value * trunc_factor) / trunc_factor
+            # print to screen
+            s += f"  {category}        ${value:.2f}\n"
+    return s
 
 
 def main(argv: list[str] = sys.argv) -> None:
@@ -188,8 +157,7 @@ def main(argv: list[str] = sys.argv) -> None:
             print("Invalid argument")
             raise ValueError("Could not understand number format") from e
 
-    budget = calculate_budget(plan_obj, amount)
-    print_budget(budget)
+    print(process_budget(plan_obj, amount))
 
 
 if __name__ == "__main__":
