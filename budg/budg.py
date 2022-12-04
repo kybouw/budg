@@ -1,27 +1,28 @@
 #! /usr/bin/python3
+"""
+budg
 
-########################################################################
-# budg - my python script for budgeting my paychecks
-#
-# Copyright (C) 2022 Kyle Bouwman
-#
-# This file is part of budg.
-#
-# budg is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# budg is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
-########################################################################
+Budgeting income the easy way
 
+by Kyle Bouwman
 
+Copyright (C) 2022 Kyle Bouwman
+
+This file is part of budg.
+
+budg is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+budg is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
+"""
 import argparse
 import math
 import os
@@ -31,13 +32,25 @@ from typing import Any
 import tomli
 
 PLAN_DIRECTORY = os.path.join(os.path.expanduser("~"), "Documents", "budg")
-USER_PLAN_FILENAME = "plan.toml"
-DEFAULT_PLAN_FILENAME = "defaultplan.toml"
 
 
 def get_path_to_plan(plan_name: str, plan_dir: str = PLAN_DIRECTORY) -> str:
-    """Verifies path to plan file, or determines path based on name"""
+    """Determines the path to the specified plan
 
+    Parameters
+    ----------
+    plan_name: str
+        A reference to a plan file somewhere. Can be a full path to the
+        toml file or the name of a file inside plan_dir
+    plan_dir: str, default PLAN_DIRECTORY
+        The path to a directory of plan toml files to search through for
+        plan_name.
+
+    Returns
+    -------
+    str
+        The full path to the plan toml file specified by plan_name
+    """
     # helper
     def is_valid_file(s: str) -> bool:
         """Checks if s is a path to a valid plan toml file"""
@@ -66,13 +79,24 @@ def get_path_to_plan(plan_name: str, plan_dir: str = PLAN_DIRECTORY) -> str:
 
 
 def calculate_budget(plan: dict[str, Any], total: float) -> dict:
-    """Calculates budget amounts based on plan for the given total"""
+    """Calculates budget amounts based on plan for the given total
 
+    Parameters
+    ----------
+    plan: dict[str, Any]
+        A plan object
+    total: float
+        The total amount to budget
+
+    Returns
+    -------
+    dict
+        A map of budget items from the plan to it's calculated values
+    """
     budgit = {}
 
     def truncate_dollars(val: float) -> float:
         """Helper: Truncates decimals to the hundredths place"""
-
         if val == float("inf") or val == float("-inf"):
             return val
         factor = 100
@@ -92,8 +116,19 @@ def calculate_budget(plan: dict[str, Any], total: float) -> dict:
 
 
 def print_budget(budget: dict) -> float:
-    """Prints calculated budget to screen"""
+    """Prints calculated budget to screen
 
+    Parameters
+    ----------
+    budget: dict
+        A map of budget plan items to dollar amounts
+
+    Returns
+    -------
+    float
+        The total amount budgeted based on low-level plan items. Useful
+        for testing.
+    """
     total = 0.0
     for category in budget:
         print(category)
@@ -109,10 +144,18 @@ def print_budget(budget: dict) -> float:
 
 
 def main(argv: list[str] = sys.argv) -> None:
-    """Driver function
+    """Driver function.
     Handles high level program setup and user interfacing.
-    """
 
+    Parameters
+    ----------
+    argv: list[str], default sys.argv
+        A list of string arguments resembling that which would be
+        returned by 'sys.argv'.
+        The list must be in the form of
+        ["budg.py", {("-p", "plan_name",)|"-h"}, "float"]
+        where the part in {} is optional.
+    """
     parser = argparse.ArgumentParser(description="Budget some dollars.")
     parser.add_argument(
         "values",
