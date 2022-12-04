@@ -144,5 +144,8 @@ def main(argv: list[str] = sys.argv) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv)
-    # main(["budg.py", "100"])  # XXX testing
+
+    # XXX testing
+    # main(["budg.py", "100"])
+
+    main()
