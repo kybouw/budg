@@ -97,10 +97,20 @@ def process_budget(plan: dict[str, Any], total: float) -> str:
     # plans follow a major/minor format
     # There is major category that labels groups of budget categories,
     #   and a minor category that labels individual budget categories
-    s = str()
+    s = "=============================\n"
     for group in plan:
-        s += f"{group}\n"
+        lcategories = [str.lower(x) for x in plan[group].keys()]
+        if "total" in lcategories:
+            raw_dvalue = total * (plan[group]["total"] / 100)
+            trunc_dvalue = f"{(math.floor(raw_dvalue * 100) / 100):.2f}"
+            dvalue = f"${trunc_dvalue:>9}"
+        else:
+            dvalue = ""
+        s += f"{group:19}{dvalue}\n"
+        s += "-----------------------------\n"
         for category in plan[group]:
+            if str.lower(category) == "total":
+                continue
             # calculate the value of this category
             ratio = plan[group][category] / 100
             value = total * ratio
@@ -108,7 +118,10 @@ def process_budget(plan: dict[str, Any], total: float) -> str:
             trunc_factor = 100
             value = math.floor(value * trunc_factor) / trunc_factor
             # print to screen
-            s += f"  {category}        ${value:.2f}\n"
+            value = f"{value:.2f}"
+            s += f"> {category:17}${value:>9}\n"
+            # s += "--------------------------\n"
+        s += "=============================\n"
     return s
 
 
@@ -146,7 +159,7 @@ def main(argv: list[str] = sys.argv) -> None:
 
     plan_path = get_path_to_plan(args.plan)
     with open(plan_path, "rb") as file:
-        plan_obj = tomli.load(file)
+        plan_file_data = tomli.load(file)
 
     amount = 0.0
     for val in args.values:
@@ -157,7 +170,7 @@ def main(argv: list[str] = sys.argv) -> None:
             print("Invalid argument")
             raise ValueError("Could not understand number format") from e
 
-    print(process_budget(plan_obj, amount))
+    print(process_budget(plan_file_data, amount))
 
 
 if __name__ == "__main__":
