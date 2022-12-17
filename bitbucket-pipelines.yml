@@ -10,7 +10,8 @@ pipelines:
     - step:
         name: Format code
         script:
-          - poetry run black .
+          - pip install black
+          - black .
     - step:
         name: Lint code
         script:
