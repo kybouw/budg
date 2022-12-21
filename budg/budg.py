@@ -78,7 +78,7 @@ def get_path_to_plan(plan_name: str, plan_dir: str = PLAN_DIRECTORY) -> str:
     raise FileNotFoundError()
 
 
-def process_budget(plan: dict[str, Any], total: float) -> str:
+def make_budg_table(plan: dict[str, Any], budg_total: float) -> str:
     """Creates output text using calculated budget amounts based on plan
     for the given total
 
@@ -86,7 +86,7 @@ def process_budget(plan: dict[str, Any], total: float) -> str:
     ----------
     plan: dict[str, Any]
         A plan object
-    total: float
+    budg_total: float
         The total amount to budget
 
     Returns
@@ -101,7 +101,7 @@ def process_budget(plan: dict[str, Any], total: float) -> str:
     for group in plan:
         lcategories = [str.lower(x) for x in plan[group].keys()]
         if "total" in lcategories:
-            raw_dvalue = total * (plan[group]["total"] / 100)
+            raw_dvalue = budg_total * (plan[group]["total"] / 100)
             trunc_dvalue = f"{(math.floor(raw_dvalue * 100) / 100):.2f}"
             dvalue = f"${trunc_dvalue:>9}"
         else:
@@ -113,14 +113,14 @@ def process_budget(plan: dict[str, Any], total: float) -> str:
                 continue
             # calculate the value of this category
             ratio = plan[group][category] / 100
-            value = total * ratio
+            value = budg_total * ratio
             # truncate
             trunc_factor = 100
             value = math.floor(value * trunc_factor) / trunc_factor
             # print to screen
             value = f"{value:.2f}"
             s += f"> {category:17}${value:>9}\n"
-            # s += "--------------------------\n"
+            # s += "-----------------------------\n"
         s += "=============================\n"
     return s
 
@@ -133,10 +133,10 @@ def main(argv: list[str] = sys.argv) -> None:
     ----------
     argv: list[str], default sys.argv
         A list of string arguments resembling that which would be
-        returned by 'sys.argv'.
+        returned by `sys.argv`.
         The list must be in the form of
-        ["budg.py", {("-p", "plan_name",)|"-h"}, "float"]
-        where the part in {} is optional.
+        `["budg.py", {("-p", "plan_name",)|"-h"}, "float"]`
+        where the part in `{}` is optional.
     """
     parser = argparse.ArgumentParser(description="Budget some dollars.")
     parser.add_argument(
@@ -170,12 +170,13 @@ def main(argv: list[str] = sys.argv) -> None:
             print("Invalid argument")
             raise ValueError("Could not understand number format") from e
 
-    print(process_budget(plan_file_data, amount))
+    budg_output = make_budg_table(plan_file_data, amount)
+    print(budg_output)
 
 
 if __name__ == "__main__":
 
     # XXX testing
-    # main(["budg.py", "--plan", "test/test.toml", "100"])
+    # main(["budg.py", "--plan", "test/test.toml", "3200"])
 
     main()
