@@ -26,6 +26,7 @@ along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
 import argparse
 import math
 import os
+import re
 import sys
 from typing import Any
 
@@ -125,6 +126,62 @@ def make_budg_table(plan: dict[str, Any], budg_total: float) -> str:
     return s
 
 
+def get_dollar_value(val_str: str) -> float:
+    """Converts input to a float if it can be interpreted as a
+    valid dollar amount. Returns 0 if input does not follow
+    rules defined below.
+
+    - Strings must not contain alphabet characters:
+        123.45 or 123
+        - 5e2 is not acceptable. Must be 500.
+    - Strings may start with a dollar sign (USD only):
+        $123.45 or $123
+    - Strings may separate thousands groups with commas:
+        123,456.78 or 1,200
+        - comma groups must be groups of threes. No 1234,567 or 123,45
+    - Values less than a dollar must start with a 0 before the decimal:
+        0.32
+    - Strings may only contain up to two decimal places:
+        123.45
+        - 5.5 is acceptable but will be interpreted as 5.50, not 5.05
+
+    Parameters
+    ----------
+    val_str: str
+        A string that represents a dollar amount
+
+    Returns
+    -------
+    float
+        A dollar amount as a float. Zero if string value does not follow
+        format defined above.
+    """
+    # regex for recognizing dollar amount patterns as defined above
+    dollar_amount_pattern = re.compile(
+        pattern=r"^\$?(((\d{1,3}(,\d{3})*)|(\d+))(\.\d{0,2})?)$",
+    )
+    val_float: float = 0
+
+    if re.fullmatch(dollar_amount_pattern, val_str) is not None:
+        # string matches rules
+        # remove $ and , and cast float
+        no_commas = str.replace(val_str, ",", "")
+        no_dollarsigns = str.replace(no_commas, "$", "")
+        val_float = float(no_dollarsigns)
+    else:
+        # string does not match rules
+        print(f"Could not interpret value: {val_str}")
+        print("Try using a value in the form XXX.XX")
+        if str.startswith(val_str, "."):
+            print(
+                "Values less than 1 must start with a 0",
+                "\n e.g., .32 -> 0.32",
+            )
+        print()
+
+    return val_float
+
+
 def main(argv: list[str] = sys.argv) -> None:
     """Driver function.
     Handles high level program setup and user interfacing.
@@ -163,12 +220,7 @@ def main(argv: list[str] = sys.argv) -> None:
 
     amount = 0.0
     for val in args.values:
-        try:
-            amount += float(val)
-        except ValueError as e:
-            print("Usage: budget XXX.XX")
-            print("Invalid argument")
-            raise ValueError("Could not understand number format") from e
+        amount += get_dollar_value(val)
 
     budg_output = make_budg_table(plan_file_data, amount)
     print(budg_output)
