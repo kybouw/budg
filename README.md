@@ -70,24 +70,33 @@ For example, to budget $100:
 
 ```text
 $ budg 100
-Necessities
-  total        $50.00
-Savings
-  total        $20.00
-Discretionary
-  total        $30.00
+=============================
+Necessities        $    50.00
+-----------------------------
+=============================
+Savings            $    20.00
+-----------------------------
+=============================
+Discretionary      $    30.00
+-----------------------------
+=============================
 ```
 
-And multiple values (total: $1654.20):
+You can use dollar signs, comma-separated groups, and multiple values.
+Example (total: $2654.20):
 
 ```text
-$ budg 123.45 543.21 987.54
-Necessities
-  total        $827.10
-Savings
-  total        $330.84
-Discretionary
-  total        $496.26
+$ budg $123.45 1,443.21 1087.54
+=============================
+Necessities        $  1327.10
+-----------------------------
+=============================
+Savings            $   530.84
+-----------------------------
+=============================
+Discretionary      $   796.25
+-----------------------------
+=============================
 ```
 
 ### Plans
@@ -146,19 +155,23 @@ Budgeting $100 with the plan above would give us this output:
 
 ```text
 $ budg 100
-Necessities
-  rent        $30.00
-  gas_auto        $20.00
-  total        $50.00
-Savings
-  investments        $10.00
-  cash        $10.00
-  total        $20.00
-Discretionary
-  restaurants        $10.00
-  entertainment        $10.00
-  shopping        $10.00
-  total        $30.00
+=============================
+Necessities        $    50.00
+-----------------------------
+> rent             $    30.00
+> gas_auto         $    20.00
+=============================
+Savings            $    20.00
+-----------------------------
+> investments      $    10.00
+> cash             $    10.00
+=============================
+Discretionary      $    30.00
+-----------------------------
+> restaurants      $    10.00
+> entertainment    $    10.00
+> shopping         $    10.00
+=============================
 ```
 
 **NOTE:**
