@@ -243,6 +243,6 @@ def main(argv: list[str] = sys.argv) -> None:
 if __name__ == "__main__":
 
     # XXX testing
-    # main(["budg.py", "--plan", "test/test.toml", "3200"])
+    # main(["budg.py", "--plan", "test/test.toml", "100"])
 
     main()
