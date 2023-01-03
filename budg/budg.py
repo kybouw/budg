@@ -99,29 +99,43 @@ def make_budg_table(plan: dict[str, Any], budg_total: float) -> str:
     # There is major category that labels groups of budget categories,
     #   and a minor category that labels individual budget categories
     s = "=============================\n"
-    for group in plan:
-        lcategories = [str.lower(x) for x in plan[group].keys()]
-        if "total" in lcategories:
-            raw_dvalue = budg_total * (plan[group]["total"] / 100)
-            trunc_dvalue = f"{(math.floor(raw_dvalue * 100) / 100):.2f}"
-            dvalue = f"${trunc_dvalue:>9}"
-        else:
-            dvalue = ""
-        s += f"{group:19}{dvalue}\n"
-        s += "-----------------------------\n"
-        for category in plan[group]:
-            if str.lower(category) == "total":
-                continue
-            # calculate the value of this category
-            ratio = plan[group][category] / 100
-            value = budg_total * ratio
-            # truncate
-            trunc_factor = 100
-            value = math.floor(value * trunc_factor) / trunc_factor
-            # print to screen
-            value = f"{value:.2f}"
-            s += f"> {category:17}${value:>9}\n"
-            # s += "-----------------------------\n"
+    for major in plan:
+        # if major has no minor categories
+        major_type: type = type(plan[major])
+        if major_type is float or major_type is int:
+            major_ratio = float(plan[major] / 100)
+            major_amount = budg_total * major_ratio
+            trunc_major_amount = math.floor(major_amount * 100) / 100
+            formatted_amount = f"{trunc_major_amount:.2f}"
+            s += f"{major:19}${formatted_amount:>9}\n"
+
+        # if major is group of minor categories
+        elif major_type is dict:
+            major_sum_amount: float = 0
+            # add placeholder for total at the end
+            s += "00000000000000000000000000000\n"
+            s += "-----------------------------\n"
+            for category in plan[major]:
+                # for backwards compatibility, skip "total" minor
+                if str.lower(category) == "total":
+                    continue
+                # calculate the value of this category
+                ratio = plan[major][category] / 100
+                value = budg_total * ratio
+                # truncate
+                trunc_factor = 100
+                trunc_value = math.floor(value * trunc_factor) / trunc_factor
+                major_sum_amount += trunc_value
+                # add to string
+                value_formatted = f"{trunc_value:.2f}"
+                s += f"> {category:17}${value_formatted:>9}\n"
+            major_sum_formatted = f"{major_sum_amount:.2f}"
+            # swap out placeholder for total major amount
+            s = str.replace(
+                s,
+                "00000000000000000000000000000",
+                f"{major:19}${major_sum_formatted:>9}",
+            )
         s += "=============================\n"
     return s
 

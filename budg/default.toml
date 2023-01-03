@@ -1,8 +1,5 @@
-[Necessities]
-total = 50
+Necessities = 50
 
-[Savings]
-total = 20
+Savings = 20
 
-[Discretionary]
-total = 30
+Discretionary = 30
