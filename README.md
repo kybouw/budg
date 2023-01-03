@@ -55,15 +55,19 @@ $ ./install.sh
 Install succeeded
 ```
 
-This script will copy the python file to `~/.local/bin/budg` and make it executable.
-Then, it will create the `budg` directory in your `Documents` folder and copy the default plan file there.
+This script will copy the python file to `~/.local/bin/budg` and make it
+executable.
+Then, it will create the `budg` directory in your `Documents` folder and copy
+the default plan file there.
 
 ### Uninstallation
 
 You can also use `install.sh -u` to remove all traces of budg from your system.
 
-Deletes the python file in `~/.local/bin` and the entire budg directory in `~/Documents`.
-**Make sure to save your plan toml files in a safe place if you want to keep them!**
+Deletes the python file in `~/.local/bin` and the entire budg directory in
+`~/Documents`.
+**Make sure to save your plan toml files in a safe place if you want to keep
+them!**
 
 ```text
 $ ./install.sh -u
@@ -130,12 +134,14 @@ Discretionary = 30
 ### Plans
 
 Budget plans are defined in toml files.
-The file simply states a set of named categories and percentages as decimal values between 0 and 1.
+The file simply states a set of named categories and percentages as decimal
+values between 0 and 1.
 Budg divides your income into these weighted categories as defined by your plan.
 
 Plan files are stored in `~/Documents/budg/`.
 You can change your plan by modifying `~/Documents/budg/plan.toml`.
-You can also tell budg to use a different plan file with the `-p`/`--plan` option.
+You can also tell budg to use a different plan file with the `-p`/`--plan`
+option.
 
 You can either use a path:
 
@@ -156,7 +162,8 @@ $ budg -p otherplan 100
 
 #### Creating a plan
 
-Plans are toml files in `~/Documents/budg/` that outline your budget. Create categories (and subcategories!) and assign each one a percentage.
+Plans are toml files in `~/Documents/budg/` that outline your budget. Create
+categories (and subcategories!) and assign each one a percentage.
 
 Here is an example of a `plan.toml` file:
 
@@ -200,21 +207,34 @@ Discretionary      $    30.00
 ```
 
 **NOTE:**
-The totals are not verified or calculated in any way, _so you are responsible for making sure you do not budget more than 100% of your income!_
+The grand total is not verified or calculated in any way, _so you are
+responsible for making sure you do not budget more than 100% of your income!_
 
-A default budget plan based on [the 50/20/30 plan](#the-502030-plan) is created when you install budg.
+A default budget plan based on [the 50/20/30 plan](#the-502030-plan) is created
+when you install budg.
 
 ### The 50/20/30 Plan
 
-The 50/20/30 plan is basic budget starting point that should work for most people. It can be easily modified to fit your lifestyle, and I encourage you to find a plan that fits your needs and priorities.
+The 50/20/30 plan is basic budget starting point that should work for most
+people. It can be easily modified to fit your lifestyle, and I encourage you to
+find a plan that fits your needs and priorities.
 
-The model works by defining 3 major spending categories: Necessities, Savings, and Discretionary.
-Necessities are things you _must_ have: food, shelter, utilities, medical expenses, transportation. If you need it to survive, or to earn more money, then it is a necessity.
-Savings is all about building wealth and working towards financial goals. This category includes debt payments, investments, and general savings. This is the most important category. _Pay yourself first!_
-Discretionary is all the nice-to-haves. Things like restaurants, bars, and fun activities.
+The model works by defining 3 major spending categories: Necessities, Savings,
+and Discretionary.
+Necessities are things you _must_ have: food, shelter, utilities, medical
+expenses, transportation. If you need it to survive, or to earn more money,
+then it is a necessity.
+Savings is all about building wealth and working towards financial goals. This
+category includes debt payments, investments, and general savings. This is the
+most important category. _Pay yourself first!_
+Discretionary is all the nice-to-haves. Things like restaurants, bars, and fun
+activities.
 
 Each category is given a weight (50%, 20%, and 30%, respectively).
-You take your total after-tax income and divide it into the categories according to weight, creating allowances for yourself. So, half of your income will go toward necessities. Twenty percent should go towards savings, and thirty percent towards discretionary.
+You take your total after-tax income and divide it into the categories
+according to weight, creating allowances for yourself. So, half of your income
+will go toward necessities. Twenty percent should go towards savings, and
+thirty percent towards discretionary.
 
 ![The 50/20/30 budget](https://www.thebalance.com/thmb/T7aTgYvTRfglPtW9C2TZFJSeSZQ=/950x0/filters:format(webp)/the-50-30-20-rule-of-thumb-453922-final-5b61ec23c9e77c007be919e1-5ecfc51b09864e289b0ee3fa0d52422f.png)
 
@@ -222,11 +242,12 @@ Image by (c) The Balance 2019.
 Their article on the 50/20/30 budget can be found [here](https://www.thebalance.com/the-50-30-20-rule-of-thumb-453922).
 You can also read more about the 50/20/30 budget [on Investopedia.](https://www.investopedia.com/ask/answers/022916/what-502030-budget-rule.asp)
 
-I hope this quick little guide helped you get familiar with the 50/20/30 budget and inspired ideas that you can implement in your own plan.
+I hope this quick little guide helped you get familiar with the 50/20/30 budget
+and inspired ideas that you can implement in your own plan.
 
 ## License Notice
 
-Copyright (C) 2020-2022 Kyle Bouwman
+Copyright (C) 2020-2023 Kyle Bouwman
 
 Budg is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
