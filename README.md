@@ -2,7 +2,33 @@
 
 A simple percentage-based budget calculator.
 
+## Introduction
+
+Say you have $236, and you want to split that 60/40. This script makes it easy!
+Create a toml file like so:
+
+```toml
+categoryA = 60
+categoryB = 40
+```
+
+and then run `budg $236`
+
+```text
+$ budg $236
+=============================
+categoryA          $   141.60
+=============================
+categoryB          $    94.40
+=============================
+```
+
+And your toml file can be saved for future use. Much easier than breaking out
+the calculator for every paycheck, and much more lightweight and flexible than
+a spreadsheet.
+
 - [Budg](#budg)
+  - [Introduction](#introduction)
   - [Installation](#installation)
     - [Uninstallation](#uninstallation)
   - [Usage](#usage)
