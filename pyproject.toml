@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "budg"
-version = "0.2.0a0"
+version = "1.0.0"
 description = "a simple budget tool"
 authors = ["Kyle Bouwman <kybouw@gmail.com>"]
 license = "GPLv3"

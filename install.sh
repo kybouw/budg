@@ -3,7 +3,7 @@
 ################################################################################
 # budg - my python script for budgeting my paychecks
 #
-# Copyright (C) 2022 Kyle Bouwman
+# Copyright (C) 2022-2023 Kyle Bouwman
 #
 # This file is part of budg.
 #
