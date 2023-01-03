@@ -11,7 +11,7 @@ pipelines:
             name: Check code format
             script:
               - pip install black
-              - black --check .
+              - black -l 79 --check .
         - step:
             name: Lint code
             script:
