@@ -72,13 +72,10 @@ For example, to budget $100:
 $ budg 100
 =============================
 Necessities        $    50.00
------------------------------
 =============================
 Savings            $    20.00
------------------------------
 =============================
 Discretionary      $    30.00
------------------------------
 =============================
 ```
 
@@ -89,14 +86,19 @@ Example (total: $2654.20):
 $ budg $123.45 1,443.21 1087.54
 =============================
 Necessities        $  1327.10
------------------------------
 =============================
 Savings            $   530.84
------------------------------
 =============================
 Discretionary      $   796.25
------------------------------
 =============================
+```
+
+Here is the `plan.toml` file for the above:
+
+```toml
+Necessities = 50
+Savings = 20
+Discretionary = 30
 ```
 
 ### Plans
@@ -136,18 +138,15 @@ Here is an example of a `plan.toml` file:
 [Necessities]
 rent = 30
 gas_auto = 20
-total = 50
 
 [Savings]
 investments = 10
 cash = 10
-total = 20
 
 [Discretionary]
 restaurants = 10
 entertainment = 10
 shopping = 10
-total = 30
 ```
 
 Budg will use those percentages to divvy up your income and print the result.
