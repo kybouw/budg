@@ -135,7 +135,7 @@ Discretionary = 30
 
 Budget plans are defined in toml files.
 The file simply states a set of named categories and percentages as decimal
-values between 0 and 1.
+values between 0 and 100.
 Budg divides your income into these weighted categories as defined by your plan.
 
 Plan files are stored in `~/Documents/budg/`.
