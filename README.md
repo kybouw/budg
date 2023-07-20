@@ -221,14 +221,25 @@ find a plan that fits your needs and priorities.
 
 The model works by defining 3 major spending categories: Necessities, Savings,
 and Discretionary.
+
+#### Necessities
+
 Necessities are things you _must_ have: food, shelter, utilities, medical
 expenses, transportation. If you need it to survive, or to earn more money,
 then it is a necessity.
+
+#### Savings
+
 Savings is all about building wealth and working towards financial goals. This
 category includes debt payments, investments, and general savings. This is the
 most important category. _Pay yourself first!_
+
+#### Discretionary
+
 Discretionary is all the nice-to-haves. Things like restaurants, bars, and fun
 activities.
+
+#### Divide
 
 Each category is given a weight (50%, 20%, and 30%, respectively).
 You take your total after-tax income and divide it into the categories
