@@ -1,0 +1,14 @@
+[Necessities]
+rent = 30
+groceries = 10
+auto = 10
+
+[Savings]
+retirement = 10
+emergencies = 10
+
+[Discretionary]
+restaurants = 10
+entertainment = 10
+shopping = 10
+

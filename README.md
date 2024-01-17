@@ -28,52 +28,11 @@ the calculator for every paycheck, and much more lightweight and flexible than
 a spreadsheet.
 
 - [Budg](#budg)
-  - [Introduction](#introduction)
-  - [Installation](#installation)
-    - [Uninstallation](#uninstallation)
   - [Usage](#usage)
     - [Plans](#plans)
       - [Creating a plan](#creating-a-plan)
     - [The 50/20/30 Plan](#the-502030-plan)
   - [License Notice](#license-notice)
-
-## Installation
-
-Budg can be installed using the bash script `install.sh`.
-
-1. Download the repo
-2. cd into the repo
-3. run `./install.sh`
-
-```text
-$ git clone https://github.com/kybouw/budg.git
-Cloning into 'budg'
-...
-$ cd budg
-$ ./install.sh
-...
-Install succeeded
-```
-
-This script will copy the python file to `~/.local/bin/budg` and make it
-executable.
-Then, it will create the `budg` directory in your `Documents` folder and copy
-the default plan file there.
-
-### Uninstallation
-
-You can also use `install.sh -u` to remove all traces of budg from your system.
-
-Deletes the python file in `~/.local/bin` and the entire budg directory in
-`~/Documents`.
-**Make sure to save your plan toml files in a safe place if you want to keep
-them!**
-
-```text
-$ ./install.sh -u
-...
-budg uninstalled
-```
 
 ## Usage
 
@@ -258,7 +217,7 @@ and inspired ideas that you can implement in your own plan.
 
 ## License Notice
 
-Copyright (C) 2020-2023 Kyle Bouwman
+Copyright (C) 2020-2024 Kyle Bouwman
 
 Budg is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
