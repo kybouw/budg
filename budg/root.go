@@ -70,6 +70,9 @@ var rootCmd = &cobra.Command{
 
 		var amount float64 = 0
 		for _, arg := range args {
+			if arg[0:1] == "$" {
+				arg = arg[1:]
+			}
 			val, err := strconv.ParseFloat(arg, 64)
 			if err != nil {
 				fmt.Fprintln(os.Stderr, err)
