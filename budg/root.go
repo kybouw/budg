@@ -61,9 +61,15 @@ func (plan BudgPlan) CalculateTable(amount float64) string {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "budg",
+	Use: "budg amount...",
+	Example: "  budg 100\n" +
+		"  budg '$123.45'\n" +
+		"  budg 100 250 34.99 12.01",
 	Short: "budg is a simple budget calculator",
-	Long:  "budg is a simple budget calculator",
+	Long: "budg is a simple budget calculator\n" +
+		"Enter a list of dollar amounts and it will divvy the total up\n" +
+		"according to your plan.",
+	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var plan BudgPlan
 		toml.DecodeFile("plan.toml", &plan)
