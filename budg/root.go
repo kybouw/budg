@@ -1,23 +1,23 @@
 // budg
-// 
+//
 // Budgeting income the easy way
-// 
+//
 // by Kyle Bouwman
-// 
+//
 // Copyright (C) 2022-2024 Kyle Bouwman
-// 
+//
 // This file is part of budg.
-// 
+//
 // budg is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // budg is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with budg.  If not, see <https://www.gnu.org/licenses/gpl.html>.
 
@@ -35,16 +35,16 @@ import (
 )
 
 /*
- Representation of a plan.
- The outer and inner string keys are group name and item name, respectively.
- The float value pointed to by the keys is a percentage amount (0-100) that
- represents how much of the total budget belongs to that item.
+Representation of a plan.
+The outer and inner string keys are group name and item name, respectively.
+The float value pointed to by the keys is a percentage amount (0-100) that
+represents how much of the total budget belongs to that item.
 */
 type BudgPlan map[string]map[string]float64
 
 /*
- Calculates the budget totals for each item and builds a string table
- for output to the screen.
+Calculates the budget totals for each item and builds a string table
+for output to the screen.
 */
 func (plan BudgPlan) CalculateTable(amount float64) string {
 	var ret string = ""
