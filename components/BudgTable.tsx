@@ -70,7 +70,7 @@ export default function BudgTable() {
         <TableCell>
           <NumberInput value={itemValue} onValueChange={setItemValue} min={0} />
         </TableCell>
-        <TableCell>${Math.floor(budgetAmount * itemValue) / 100}</TableCell>
+        <TableCell>${(Math.floor(budgetAmount * itemValue) / 100).toFixed(2)}</TableCell>
       </TableRow>
     );
   };
