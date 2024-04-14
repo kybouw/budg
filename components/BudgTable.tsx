@@ -57,15 +57,16 @@ export default function BudgTable() {
     setData(newData);
   };
 
-  const itemToNode = (item: LineItem) => {
+  const LineItemNode = (item: LineItem) => {
+    const name = item.name;
     const [itemValue, setItemValue] = useState(item.value);
     useEffect(() => {
-      editData(item.name, itemValue);
-    }, [itemValue]);
+      editData(name, itemValue);
+    }, [itemValue, name]);
 
     return (
-      <TableRow key={item.name}>
-        <TableCell>{item.name}</TableCell>
+      <TableRow key={name}>
+        <TableCell>{name}</TableCell>
         <TableCell>
           <NumberInput value={itemValue} onValueChange={setItemValue} min={0} />
         </TableCell>
@@ -84,7 +85,7 @@ export default function BudgTable() {
             <TableHeaderCell>Amount</TableHeaderCell>
           </TableRow>
         </TableHead>
-        <TableBody>{data.map(itemToNode)}</TableBody>
+        <TableBody>{data.map(LineItemNode)}</TableBody>
         <TableFoot>
           <TableRow>
             <TableFooterCell>Total</TableFooterCell>
