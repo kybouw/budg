@@ -21,21 +21,21 @@ export interface LineItem {
 export default function BudgTable() {
   const totalPoints = 100;
 
-  const [budgetAmount, setBudgetAmount] = useState(0);
+  const [budgetAmount, setBudgetAmount] = useState(1000);
 
   const [pointsUsed, setPointsUsed] = useState(0);
   const [pointsRemaining, setPointsRemaining] = useState(totalPoints - pointsUsed);
-  const [data, setData] = useState([
-    { name: "needs", value: 0 },
-    { name: "invest", value: 0 },
-    { name: "fun", value: 0 },
-    { name: "give", value: 0 },
-  ]);
-
   // whenever the number of used points updates, we need to calculate the points remaining
   useEffect(() => {
     setPointsRemaining(totalPoints - pointsUsed);
   }, [pointsUsed, totalPoints]);
+
+  const [data, setData] = useState([
+    { name: "needs", value: 50 },
+    { name: "invest", value: 20 },
+    { name: "fun", value: 20 },
+    { name: "give", value: 10 },
+  ]);
 
   // whenever data is changed, we need to recalculate how many points we are using.
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function BudgTable() {
         <TableCell>
           <NumberInput value={itemValue} onValueChange={setItemValue} min={0} />
         </TableCell>
-        <TableCell>${Math.floor(budgetAmount * itemValue) / 100}</TableCell>
+        <TableCell>${(Math.floor(budgetAmount * itemValue) / 100).toFixed(2)}</TableCell>
       </TableRow>
     );
   };
