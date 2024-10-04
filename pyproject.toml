@@ -1,23 +1,16 @@
-[tool.poetry]
+[project]
 name = "budg"
 version = "1.0.0"
 description = "a simple budget tool"
-authors = ["Kyle Bouwman <kybouw@gmail.com>"]
+authors = ["Kyle Bouwman <kyle@kybouw.com>"]
 license = "GPLv3"
 readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "tomli>=2.0.2",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10.0"
-tomli = "^2.0.1"
-
-[tool.poetry.group.dev.dependencies]
-black = "^22"
-pytest = "^7.2.0"
-flake8 = "^5.0.4"
-
-[tool.black]
-line-length = 79
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.3",
+]
