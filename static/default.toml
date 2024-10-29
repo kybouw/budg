@@ -1,0 +1,12 @@
+[Necessities]
+rent = 30
+gas_auto = 20
+
+[Savings]
+investments = 10
+cash = 10
+
+[Discretionary]
+restaurants = 10
+entertainment = 10
+shopping = 10
